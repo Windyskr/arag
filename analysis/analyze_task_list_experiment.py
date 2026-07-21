@@ -165,8 +165,9 @@ def main():
         "除下述 task-list 机制外，实验继续使用 `configs/test_hotpotqa.yaml`：LLM 为 "
         "`grok-4.5`，temperature 为 0，embedding 为 `Qwen/Qwen3-Embedding-0.6B`，"
         "`max_loops=15`，token budget 为 128000。chunks、embedding 索引、keyword search、"
-        "semantic search、read_chunk、各检索工具的 `top_k` 行为均未修改，也没有重建 embedding "
-        "索引。原始 A-RAG system prompt 被保留，只在其后追加 task-list 协议。",
+        "semantic search、read_chunk 的实现和工具 schema 均未修改，也没有重建 embedding 索引；"
+        "工具允许的 `top_k` 范围或默认值也未改，但模型在具体轮次中选择的工具参数仍可能因新协议而变化。"
+        "原始 A-RAG system prompt 被保留，只在其后追加 task-list 协议。",
         "",
         "### 优化 1：增加跨轮持久化的结构化 task state",
         "",
@@ -229,6 +230,12 @@ def main():
         "第二跳规则，以及回答前程序化门控。调整后该样例会继续查询 "
         "`Supergirl TV series originally aired on what network`，读取 Chunk 790，并回答 CBS。",
         "",
+        "需要特别说明：最终 task-list prompt 还显式写入了 Supergirl 这个反例，即“The CW television "
+        "series Supergirl”不能证明该剧最初在哪个网络播出。该规则来自对 pilot 失败轨迹的观察，所以 "
+        "`5ae78f...` 应视为定向回归测试，能证明“精确第二跳关系”机制生效，但不能作为独立 held-out "
+        "泛化证据。若排除这个定向样例，非定向的真实改善是其余 44 条中的 4 条；在其余 16 条可修复"
+        "系统错误中为 4 条。",
+        "",
         "### 输出与评测",
         "",
         "实验生成结果写入 `results/hotpotqa-task-list-v2/predictions.jsonl`，除原有 trajectory、loops、"
@@ -236,6 +243,12 @@ def main():
         "max-loops 和 token-budget 状态。评测沿用原始 `scripts/eval.py` 的 LLM judge 提示词与判定"
         "逻辑，没有为 task-list 实验改变判分标准。自动评测之后再逐条人工复核，区分真实改善、judge "
         "假阳性以及原答案本已正确的假阴性。",
+        "",
+        "生成阶段使用 5 个 worker。评测第一次以 10 个 worker 运行时遇到上游 502，未采用该次不完整"
+        "输出；随后对全部 45 条以 3 个 worker 重新评测并成功完成。并发数只影响请求调度，不改变 judge "
+        "prompt 或判分逻辑。本实验每个条件只运行一次，没有做多随机种子重复；即使 temperature 为 0，"
+        "远端模型和 LLM judge 仍不保证完全确定性。另外，由于样本是按原始错误筛选的，本结果只说明"
+        "“已知错误集的修复率”，不能直接外推为全部 1000 条 HotpotQA 的总体准确率提升。",
         "",
         "## 核心结果",
         "",
