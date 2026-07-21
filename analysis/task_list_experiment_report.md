@@ -2,12 +2,56 @@
 
 ## 实验设置
 
-- 输入：原始评测中 `llm_accuracy == 0` 的全部 45 条记录。
-- 模型与检索配置：保持 `configs/test_hotpotqa.yaml` 不变。
-- 实验处理：持久化 task state、精确完成条件、直接证据引用、
-  已读 Chunk 约束和回答前完成状态门控。
-- 输出：`results/hotpotqa-task-list-v2/predictions.jsonl`。
-- 评测：沿用 `scripts/eval.py` 的 LLM judge 提示词和判定逻辑。
+### 实验对象与对照条件
+
+本实验不是重新抽取一批问题，而是从原始 HotpotQA 评测输出中严格筛选 `llm_accuracy == 0` 的全部 45 条记录，并只重跑这 45 条。每条实验输出都保留相同的 `qid`、question 和 gold answer，原始 prediction 作为逐题基线。因此这里测量的是：在同一批已知错误样例上，仅加入 task-list 协议后，Agent 行为是否改善。
+
+除下述 task-list 机制外，实验继续使用 `configs/test_hotpotqa.yaml`：LLM 为 `grok-4.5`，temperature 为 0，embedding 为 `Qwen/Qwen3-Embedding-0.6B`，`max_loops=15`，token budget 为 128000。chunks、embedding 索引、keyword search、semantic search、read_chunk、各检索工具的 `top_k` 行为均未修改，也没有重建 embedding 索引。原始 A-RAG system prompt 被保留，只在其后追加 task-list 协议。
+
+### 优化 1：增加跨轮持久化的结构化 task state
+
+新增 `update_task_state` 工具，让模型不再只依赖对话中隐含的计划。状态保存在当前问题的 `AgentContext` 中，跨检索轮次持续存在，并在每个新问题开始时清空。其主要字段为：
+
+- `subtasks`：最少必要子问题；每项包含 id、问题、完成条件、状态、子答案、证据引文和 Chunk ID。
+- `expected_answer_type`：最终答案预期类型，例如人物、地点、网络、日期或数值。
+- `candidate_answer` 与 `candidate_evidence_chunk_ids`：当前唯一候选答案及其证据。
+- `unresolved_conflicts`：尚未解决的实体、时间、关系方向或证据冲突。
+- `next_action`：下一步计划调用的工具及 query，用于把状态更新和工具选择绑定起来。
+
+同时保存 task state 的更新历史、最终完成状态、未通过原因以及被门控拦截的回答，供逐轨迹分析。状态中只记录简短子问题和证据事实，不要求模型暴露完整 chain-of-thought。
+
+### 优化 2：在同一次模型响应中更新状态并决定下一工具
+
+第一轮要求模型先把问题拆成最少必要子问题，然后在同一 assistant response 中同时调用 `update_task_state` 和第一个搜索工具。收到一批工具结果后，下一次响应必须先依据新证据修订 task state，再在同一响应中调用 keyword_search、semantic_search 或 read_chunk。Agent 会按顺序执行该响应中的多个 tool calls，所以不需要为更新 task list 单独增加一个纯规划轮。最终轨迹中，257 次状态更新有 159 次与下一工具调用处于同一轮，覆盖 34/45 个样例。
+
+整体流程为：`拆分子问题 + 首次检索 → 阅读工具结果 → 更新完成状态 + 决定下一工具 → 继续检索/读取 → 最终完成检查 → 回答`。
+
+### 优化 3：把“完成”定义为精确关系得到直接证据
+
+每个子任务必须提供 `completion_criterion`，用 subject-relation-object 形式明确需要证明的事实。只有已经通过 read_chunk 读取的 Chunk 直接陈述该关系时，子任务才能标记为 completed；仅命中相关实体、依赖常识推测或存在相似表述都不算完成。completed 子任务还必须保存最短直接支持句到 `evidence_quote`，并保存对应 `evidence_chunk_ids`。
+
+对于 bridge 类型多跳问题，第一跳得到桥接实体后，协议要求使用“桥接实体 + 第二跳的精确关系”继续搜索，且禁止拿第一跳证据替代第二跳证据。回答前还要求复核关系方向、答案类型、比较/计数范围、实体身份以及日期或版本。发现冲突时必须写入 `unresolved_conflicts`，不能直接结束。
+
+### 优化 4：增加 read_chunk 约束和程序化回答门控
+
+实验 Agent 启用 `require_task_completion=True`。当模型准备在无工具调用的响应中直接给出最终答案时，BaseAgent 会执行结构化完成检查。只有同时满足以下条件才允许回答：
+
+- task state 已初始化且至少包含一个子任务；
+- 所有子任务均为 completed；
+- 每个子任务都有完成条件、子答案、直接证据引文和证据 Chunk ID；
+- 子任务及最终候选答案引用的所有 Chunk ID 都已经由 read_chunk 实际读取；
+- `unresolved_conflicts` 为空；
+- 最终候选答案非空，并绑定至少一个已读取的证据 Chunk。
+
+如果检查失败，Agent 不接受该次答案：它会记录被拦截的 loop、原因和 proposed answer，向模型追加一条纠正消息，并在剩余 loop 内继续更新 task state 或检索。这是代码层面的门控，而不只是提示词建议。需要注意，该门控只能验证字段完整性和 Chunk 是否已读，不能自动判断引文是否真的蕴含 completion criterion；这也是实验中出现“结构完成但语义仍错”的主要边界。
+
+### 从第一版到最终测试版的调整
+
+最初 pilot 只加入普通 task list。在 Supergirl 样例中，模型仍把“The CW television series”错误当成“该剧最初播出的网络”，自行把任务标记完成并回答 The CW。最终用于 45 条错误样例的版本因此进一步加入：精确完成条件、直接 evidence quote、证据 Chunk 必须已读、桥接实体后的第二跳规则，以及回答前程序化门控。调整后该样例会继续查询 `Supergirl TV series originally aired on what network`，读取 Chunk 790，并回答 CBS。
+
+### 输出与评测
+
+实验生成结果写入 `results/hotpotqa-task-list-v2/predictions.jsonl`，除原有 trajectory、loops、retrieved tokens 和工具日志外，还记录完整 task state、更新次数、完成原因、门控事件、max-loops 和 token-budget 状态。评测沿用原始 `scripts/eval.py` 的 LLM judge 提示词与判定逻辑，没有为 task-list 实验改变判分标准。自动评测之后再逐条人工复核，区分真实改善、judge 假阳性以及原答案本已正确的假阴性。
 
 ## 核心结果
 
