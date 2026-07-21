@@ -21,6 +21,7 @@ class BaseAgent:
         max_loops: int = 10,
         max_token_budget: int = 128000,
         verbose: bool = False,
+        require_task_completion: bool = False,
     ):
         self.llm = llm_client
         self.tools = tools
@@ -28,6 +29,7 @@ class BaseAgent:
         self.max_loops = max_loops
         self.max_token_budget = max_token_budget
         self.verbose = verbose
+        self.require_task_completion = require_task_completion
         self.tokenizer = tiktoken.encoding_for_model("gpt-4o")
     
     def _calculate_message_tokens(self, messages: List[Dict[str, Any]]) -> int:
@@ -121,6 +123,26 @@ class BaseAgent:
             
             tool_calls = message.get("tool_calls")
             if not tool_calls:
+                if self.require_task_completion:
+                    task_complete, reason = context.task_completion_status()
+                    if not task_complete:
+                        proposed_answer = message.get("content", "")
+                        context.add_task_completion_guard_event(
+                            loop=loop_count,
+                            reason=reason,
+                            proposed_answer=proposed_answer,
+                        )
+                        messages.append({
+                            "role": "user",
+                            "content": (
+                                "You attempted to answer before the persistent task list passed "
+                                f"its completion check: {reason}. Review the task list and the "
+                                "retrieved evidence. Call update_task_state together with the next "
+                                "retrieval tool, or update it to a fully supported completed state "
+                                "before answering."
+                            ),
+                        })
+                        continue
                 # No tool calls - agent is done
                 final_answer = message.get("content", "")
                 return {

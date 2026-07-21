@@ -1,0 +1,2796 @@
+{
+  "summary": {
+    "sample_count": 45,
+    "measured_llm_accuracy": 0.2,
+    "measured_llm_correct": 9,
+    "manual_genuine_improvements": 5,
+    "manual_genuine_improvement_rate_all_errors": 0.1111111111111111,
+    "manual_genuine_improvement_rate_actionable_system_errors": 0.29411764705882354,
+    "judge_false_positives": 3,
+    "baseline_eval_only_errors": 3,
+    "task_state_complete": 31,
+    "max_loops_exceeded": 18,
+    "guard_event_count": 1,
+    "avg_task_state_updates": 5.711111111111111,
+    "paired_state_updates": 159,
+    "samples_with_paired_updates": 34,
+    "baseline_avg_loops": 7.955555555555556,
+    "task_list_avg_loops": 11.244444444444444,
+    "baseline_avg_retrieved_tokens": 7807.644444444444,
+    "task_list_avg_retrieved_tokens": 9112.622222222222,
+    "task_list_avg_tool_calls": {
+      "keyword_search": 9.022222222222222,
+      "read_chunk": 2.2222222222222223,
+      "semantic_search": 5.888888888888889,
+      "update_task_state": 5.711111111111111
+    },
+    "manual_outcomes": {
+      "gold_data_issue_persists": 23,
+      "judge_false_positive": 3,
+      "system_error_persists": 11,
+      "genuine_improvement": 5,
+      "baseline_answer_already_correct": 3
+    },
+    "by_baseline_bucket": {
+      "gold_data_issue": {
+        "n": 25,
+        "judge_correct": 2,
+        "genuine": 0
+      },
+      "evidence_sufficient_reasoning": {
+        "n": 13,
+        "judge_correct": 4,
+        "genuine": 3
+      },
+      "answer_format_or_eval": {
+        "n": 6,
+        "judge_correct": 2,
+        "genuine": 1
+      },
+      "agent_tool_decision": {
+        "n": 1,
+        "judge_correct": 1,
+        "genuine": 1
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "qid": "5ae7793c554299540e5a55c2",
+      "question": "What park replaced American's first waterpark designed by the creator of seaworld?",
+      "gold_answer": "Krakatau",
+      "baseline_answer": "**Universal's Volcano Bay (also known as Volcano Bay or Universal's Volcano Bay Water Theme Park)**\n\nWet'n Wild Orlando (the flagship of the Wet'n Wild chain, located on International Drive in Orlando, Florida) was founded in 1977 by George Millay, the creator of SeaWorld, and is widely regarded as America's first water park. It closed on December 31, 2016, and was replaced by Universal's Volcano Bay, a themed water park at Universal Orlando Resort that opened on May 25, 2017. Volcano Bay was the first water park constructed by Universal itself and took over as Universal Orlando's water park.\n\nThis is directly supported by the document corpus (chunks 112 and 113).",
+      "task_list_answer": "**Universal's Volcano Bay (also known as Universal's Volcano Bay water theme park or Volcano Bay)**\n\nWet'n Wild Orlando was founded in 1977 by SeaWorld creator George Millay and is considered America's first water park. It closed on December 31, 2016, and was replaced by Universal's Volcano Bay, which opened on May 25, 2017, as Universal Orlando Resort's water park (the first constructed by Universal itself).",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 3,
+      "task_list_loops": 6,
+      "baseline_retrieved_tokens": 2775,
+      "task_list_retrieved_tokens": 4048,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who created SeaWorld?",
+            "completion_criterion": "Person X created/designed/founded SeaWorld",
+            "status": "completed",
+            "answer": "George Millay",
+            "evidence_quote": "it was founded in 1977 by seaworld creator george millay",
+            "evidence_chunk_ids": [
+              "112",
+              "113"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What was America’s first waterpark designed by the SeaWorld creator?",
+            "completion_criterion": "Waterpark Y was America’s first waterpark and designed by SeaWorld creator",
+            "status": "completed",
+            "answer": "Wet'n Wild Orlando",
+            "evidence_quote": "wet'n wild orlando ... was founded in 1977 by seaworld creator george millay and is considered america's first water park.",
+            "evidence_chunk_ids": [
+              "112",
+              "113"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "What park replaced that waterpark?",
+            "completion_criterion": "Park Z replaced waterpark Y",
+            "status": "completed",
+            "answer": "Universal's Volcano Bay",
+            "evidence_quote": "it closed on december 31, 2016, to be replaced by another water park named universal's volcano bay. ... volcano bay replaced wet'n wild as universal orlando resort's water park",
+            "evidence_chunk_ids": [
+              "112",
+              "113"
+            ]
+          }
+        ],
+        "expected_answer_type": "Park name",
+        "candidate_answer": "Universal's Volcano Bay",
+        "candidate_evidence_chunk_ids": [
+          "112",
+          "113"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a8efb5a55429918e830d172",
+      "question": "What country is the member of Gujarat Legislative Assembly and parliament representing?",
+      "gold_answer": "Jamnagar",
+      "baseline_answer": "**India.**\n\nGujarat is a state in India. The Gujarat Legislative Assembly is its unicameral state legislature (with members known as MLAs), and “parliament” here refers to India’s national Parliament (Lok Sabha/Rajya Sabha). Multiple biographical entries confirm this:\n\n- Members such as Vaja Babubhai (Mangrol constituency), Ramanlal Vora (Idar, Speaker), and others are described as serving in the “Gujarat legislative assembly, India,” as Indian politicians from “Gujarat state of india,” or as part of the “13th gujarat legislative assembly of indian state of gujarat.”\n- References include service in both the Gujarat Legislative Assembly and national bodies like the Lok Sabha and Rajya Sabha.\n- Elections and roles (e.g., 2012 Gujarat Legislative Assembly elections in the “indian state of gujarat”) further locate it firmly in India.\n\nNo other country is associated with these institutions in the documents.",
+      "task_list_answer": "**India**\n\nThe Gujarat Legislative Assembly is the unicameral legislature of the Indian state of Gujarat. Members of the Gujarat Legislative Assembly (MLAs) represent assembly constituencies within Gujarat, India. Some of these politicians have also served in the Indian Parliament (Lok Sabha or Rajya Sabha).\n\nEvidence from the documents includes statements such as:\n- “babubhai is a member of legislative assembly representing the mangrol assembly constituency in the gujarat legislative assembly, india”\n- “ramanlal vora is an indian politician of the bharatiya janata party from gujarat state of india”\n- “the 2012 gujarat legislative assembly elections were held in the indian state of gujarat … for all 182 members of the gujarat legislative assembly”\n- “jaydrathsinh is a member of the council of ministers of gujarat in 13th gujarat legislative assembly of indian state of gujarat”",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 4,
+      "task_list_loops": 6,
+      "baseline_retrieved_tokens": 4652,
+      "task_list_retrieved_tokens": 4785,
+      "task_state_updates": 4,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is Gujarat Legislative Assembly?",
+            "completion_criterion": "Document states Gujarat Legislative Assembly is the legislature of the Indian state of Gujarat",
+            "status": "completed",
+            "answer": "Gujarat Legislative Assembly is of the Indian state of Gujarat",
+            "evidence_quote": "the 2012 gujarat legislative assembly elections were held in the indian state of gujarat in december 2012 for all 182 members of the gujarat legislative assembly",
+            "evidence_chunk_ids": [
+              "122"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What country do members of Gujarat Legislative Assembly and parliament represent?",
+            "completion_criterion": "Document states the country represented by members of Gujarat Legislative Assembly and/or parliament",
+            "status": "completed",
+            "answer": "India",
+            "evidence_quote": "babubhai is a member of legislative assembly representing the mangrol assembly constituency in the gujarat legislative assembly, india ... ramanlal vora is an indian politician of the bharatiya janata party from gujarat state of india ... jaydrathsinh is a member of the council of ministers of gujarat in 13th gujarat legislative assembly of indian state of gujarat",
+            "evidence_chunk_ids": [
+              "122"
+            ]
+          }
+        ],
+        "expected_answer_type": "Country name",
+        "candidate_answer": "India",
+        "candidate_evidence_chunk_ids": [
+          "122"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a7a5ec855429941d65f25e4",
+      "question": "What is the river that Sangin is found in the valley of the primary watershed for?",
+      "gold_answer": "Sistan Basin",
+      "baseline_answer": "**Helmand River (also spelled Helmand, Helmend, Helmund, or Hirmand)**\n\nSangin is a town in Helmand Province, Afghanistan, located in the valley of the Helmand River (at about 888 m altitude, roughly 95 km northeast of Lashkargah). The Helmand River is Afghanistan’s longest river and serves as the primary watershed for the endorheic Sistan Basin (around Hamun Lake and related wetlands on the Iran-Afghanistan border).\n\nThis is directly supported by the document descriptions of Sangin’s location and the Helmand River’s role.",
+      "task_list_answer": "**Helmand River (also spelled Helmand, Helmend, Helmund, or Hirmand)**\n\nSangin (in Helmand Province, Afghanistan) is located in the valley of the Helmand River at an altitude of 888 m, about 95 km northeast of Lashkargah. The Helmand River is Afghanistan’s longest river and serves as the primary watershed for the endorheic Sistan Basin.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "judge_false_positive",
+      "manual_note": "仍回答 Helmand River，Gold 是 Sistan Basin。",
+      "baseline_loops": 5,
+      "task_list_loops": 6,
+      "baseline_retrieved_tokens": 2884,
+      "task_list_retrieved_tokens": 3889,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Where is Sangin located and in the valley of which river?",
+            "completion_criterion": "Sangin is found in the valley of river X",
+            "status": "completed",
+            "answer": "Helmand River",
+            "evidence_quote": "it is located on in the valley of the helmand river at 888 m altitude",
+            "evidence_chunk_ids": [
+              "279"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the primary watershed related to that river or Sangin?",
+            "completion_criterion": "River X is the primary watershed for Y or Sangin valley is primary watershed for river Z",
+            "status": "completed",
+            "answer": "Helmand River is the primary watershed for the endorheic Sistan basin",
+            "evidence_quote": "the helmand river ... is the longest river in afghanistan and the primary watershed for the endorheic sistan basin",
+            "evidence_chunk_ids": [
+              "278"
+            ]
+          }
+        ],
+        "expected_answer_type": "river name",
+        "candidate_answer": "Helmand River",
+        "candidate_evidence_chunk_ids": [
+          "279",
+          "278"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae234e85542994d89d5b395",
+      "question": "Which  princess of French origin did Conrad IV of Germany married to ",
+      "gold_answer": "Isabella II",
+      "baseline_answer": "**Elisabeth of Bavaria (also known as Elisabeth of Wittelsbach).**\n\nAccording to the documents, Conrad IV of Germany (1228–1254), a member of the Hohenstaufen dynasty, King of the Romans/Germany, King of Jerusalem, and King of Sicily, married Elisabeth of Bavaria (1227–1273), of the House of Wittelsbach. She was queen consort of Germany from 1246 to 1254 by this marriage.\n\nThe documents describe no French-origin princess as his wife. They do identify his mother, Isabella II of Jerusalem (also known as Yolande of Brienne), as “a princess of French origin who became monarch of Jerusalem,” but she was not his spouse.\n\nThis is the only marriage for Conrad IV mentioned in the corpus.",
+      "task_list_answer": "**Elisabeth of Bavaria (also known as Elisabeth of Wittelsbach); the documents do not identify any wife of Conrad IV as a princess of French origin.**\n\nAccording to the documents:\n- Conrad IV of Germany (1228–1254) was married to Elisabeth of Bavaria (1227–1273), a member of the House of Wittelsbach. She was queen consort of Germany from 1246 to 1254 by this marriage.\n- No other wives are mentioned for him.\n- The only person described as “a princess of French origin” in connection with Conrad IV is his mother, Isabella II of Jerusalem (also known as Yolande of Brienne, 1212–1228), who was of French origin, became monarch of Jerusalem, and was the second wife of Emperor Frederick II (Conrad’s father). She died in childbirth giving birth to Conrad.\n\nThe documents contain no evidence that Conrad IV married any princess of French origin. The phrasing of the question may stem from confusion with his mother’s background or imperfect English wording. The sole supported wife is Elisabeth of Bavaria.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "judge_false_positive",
+      "manual_note": "仍回答 Elisabeth of Bavaria，Gold 是 Isabella II。",
+      "baseline_loops": 6,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 10887,
+      "task_list_retrieved_tokens": 9908,
+      "task_state_updates": 8,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Whom did Conrad IV of Germany marry?",
+            "completion_criterion": "Document states the name of the wife of Conrad IV of Germany",
+            "status": "completed",
+            "answer": "Elisabeth of Bavaria",
+            "evidence_quote": "elisabeth of bavaria ( 1227 – 9 october 1273 ), a member of the house of wittelsbach, was queen consort of germany from 1246 to 1254 by her marriage to king conrad iv of germany.",
+            "evidence_chunk_ids": [
+              "147"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which of Conrad IV's wives was a princess of French origin?",
+            "completion_criterion": "Document states that a specific wife of Conrad IV was a French princess or of French origin",
+            "status": "completed",
+            "answer": "No such wife is identified in the documents",
+            "evidence_quote": "elisabeth of bavaria ( 1227 – 9 october 1273 ), a member of the house of wittelsbach, was queen consort of germany from 1246 to 1254 by her marriage to king conrad iv of germany.",
+            "evidence_chunk_ids": [
+              "147"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Who is the princess of French origin mentioned in connection with Conrad IV?",
+            "completion_criterion": "Document identifies a princess of French origin related to Conrad IV",
+            "status": "completed",
+            "answer": "Isabella II also known as Yolande of Brienne",
+            "evidence_quote": "isabella ii ( 121225 april 1228 ) also known as yolande of brienne, was a princess of french origin who became monarch of jerusalem.",
+            "evidence_chunk_ids": [
+              "147"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of a princess or statement of none",
+        "candidate_answer": "No princess of French origin is identified as the wife of Conrad IV of Germany; he married Elisabeth of Bavaria",
+        "candidate_evidence_chunk_ids": [
+          "147"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae207a65542994d89d5b317",
+      "question": "In which genus number of species are more, Lavatera or Oplismenus?",
+      "gold_answer": "Oplismenus",
+      "baseline_answer": "The documents indicate that **Lavatera** has more species.\n\n- **Lavatera**: A genus of about 25 species of flowering plants in the family Malvaceae.\n- **Oplismenus**: A small genus of grasses; the systematics are unclear, with over 100 described species, but only 7 species officially recognized (as of October 2015).\n\nThus, Lavatera has the greater number of (recognized) species.",
+      "task_list_answer": "**Lavatera**\n\nLavatera is a genus of about 25 species of flowering plants in the family Malvaceae.\n\nOplismenus is a small genus of grasses in which, despite over 100 described species, only 7 are officially recognized (as of October 2015).\n\nTherefore, Lavatera has more species than Oplismenus.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 3,
+      "task_list_loops": 4,
+      "baseline_retrieved_tokens": 4884,
+      "task_list_retrieved_tokens": 3163,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "How many species are in the genus Lavatera?",
+            "completion_criterion": "Lavatera has N species (exact number stated)",
+            "status": "completed",
+            "answer": "about 25",
+            "evidence_quote": "lavatera is a genus of about 25 species of flowering plants in the family malvaceae",
+            "evidence_chunk_ids": [
+              "345"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "How many species are in the genus Oplismenus?",
+            "completion_criterion": "Oplismenus has N species (exact number stated)",
+            "status": "completed",
+            "answer": "7 officially recognized",
+            "evidence_quote": "only 7 species are officially recognized as of october 2015",
+            "evidence_chunk_ids": [
+              "343",
+              "344"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which genus has more species, Lavatera or Oplismenus?",
+            "completion_criterion": "Comparison result stating which has more species",
+            "status": "completed",
+            "answer": "Lavatera",
+            "evidence_quote": "Lavatera about 25; Oplismenus 7",
+            "evidence_chunk_ids": [
+              "345",
+              "343",
+              "344"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of the genus with more species",
+        "candidate_answer": "Lavatera",
+        "candidate_evidence_chunk_ids": [
+          "345",
+          "343",
+          "344"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a7b8f5e554299294a54a9f6",
+      "question": "What was the population during the 2000 census of the town in Sagadahoc County, Maine that had a population of 3,411 during the 2010 census?",
+      "gold_answer": "1,864",
+      "baseline_answer": "**3,284 (Richmond, Maine; note: this figure is not directly stated in the corpus).**\n\nThe town in Sagadahoc County, Maine, with a 2010 census population of 3,411 is Richmond. This is confirmed by the document text: “richmond is a town in sagadahoc county, maine, united states. the population was 3, 411 at the 2010 census. it is part of the portland – south portland – biddeford, maine metropolitan statistical area.” (Chunk 306). Other Sagadahoc towns listed nearby have different 2010 figures (e.g., Woolwich 3,072; Topsham 8,784; West Bath 1,877; Georgetown 1,042; Bowdoinham 2,889; Phippsburg 2,216).\n\nThe corpus does **not** contain the 2000 census population for the *town* of Richmond. The only related 2000 figure is for the Richmond census-designated place (CDP) *within* the town: “richmond is a census - designated place ( cdp ) in the town of richmond in sagadahoc county, maine. the population was 1, 864 at the 2000 census.” (Chunk 305). No other chunks provide a 2000 town-level total for Richmond, Maine.\n\n(The commonly referenced external figure of 3,284 for the town in 2000 cannot be verified or cited from the available documents and is therefore not used as grounded evidence here.)",
+      "task_list_answer": "**3,411 (2010) town is Richmond, ME (Sagadahoc County); 2000 town population not directly stated in retrieved documents (only Richmond CDP: 1,864).**\n\nEvidence:\n- Chunk 306: “richmond is a town in sagadahoc county, maine, united states. the population was 3, 411 at the 2010 census.”\n- Chunk 305: “richmond is a census - designated place ( cdp ) in the town of richmond in sagadahoc county, maine. the population was 1, 864 at the 2000 census.” (CDP only; no matching sentence for the full town’s 2000 count.)",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 15,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 15293,
+      "task_list_retrieved_tokens": 18044,
+      "task_state_updates": 3,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which town in Sagadahoc County, Maine had a population of 3,411 in the 2010 census?",
+            "completion_criterion": "Town X in Sagadahoc County, Maine had population 3,411 in 2010 census",
+            "status": "completed",
+            "answer": "Richmond",
+            "evidence_quote": "richmond is a town in sagadahoc county, maine, united states. the population was 3, 411 at the 2010 census.",
+            "evidence_chunk_ids": [
+              "306"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What was the 2000 census population of that town?",
+            "completion_criterion": "Richmond town Sagadahoc County Maine had population Y in 2000 census",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "number",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "Richmond town population 2000"
+        }
+      }
+    },
+    {
+      "qid": "5a7f62405542992e7d278cf0",
+      "question": "What was the name of the publisher who published \"Finnegans Wake\" in 1939 by James Joyce",
+      "gold_answer": "Teriade",
+      "baseline_answer": "**The documents do not name the publisher of *Finnegans Wake*.**\n\nThe corpus (primarily Chunk 331) states that *Finnegans Wake* is a work of avant-garde comic fiction by Irish writer James Joyce. It was written in Paris over seventeen years and **published in 1939**, two years before Joyce’s death, as his final work. It is also listed among his well-known novels alongside *Dubliners* (1914) and *A Portrait of the Artist as a Young Man* (1916).\n\nNo publisher (e.g., Faber and Faber, Viking Press, or any other) is mentioned in any of the retrieved chunks that discuss the book or Joyce. The available information only confirms the year of publication.",
+      "task_list_answer": "**The documents do not name the publisher of *Finnegans Wake*.**\n\nThe only relevant information in the retrieved and read chunks (primarily Chunk 331) is that *Finnegans Wake* is a work of avant-garde comic fiction by Irish writer James Joyce, written in Paris over a period of seventeen years and **published in 1939**, two years before the author’s death. It is described as Joyce’s final work. No publisher (such as Faber and Faber, Viking Press, or any other) is mentioned in any of the chunks.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 14,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 9497,
+      "task_list_retrieved_tokens": 18451,
+      "task_state_updates": 7,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [
+        {
+          "loop": 12,
+          "reason": "pending subtasks: ['1']",
+          "proposed_answer": "The provided documents confirm that *Finnegans Wake* by James Joyce was published in 1939 (as his final work, written in Paris over seventeen years), but they do not name the publisher."
+        }
+      ],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who published Finnegans Wake by James Joyce in 1939?",
+            "completion_criterion": "Document states the name of the publisher that published Finnegans Wake in 1939",
+            "status": "blocked",
+            "answer": "Not stated in the documents",
+            "evidence_quote": "written in paris over a period of seventeen years and published in 1939, two years before the author's death, \" finnegans wake \" was joyce's final work",
+            "evidence_chunk_ids": [
+              "331"
+            ]
+          }
+        ],
+        "expected_answer_type": "string (publisher name)",
+        "candidate_answer": "The documents do not name the publisher of Finnegans Wake",
+        "candidate_evidence_chunk_ids": [
+          "331"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a7ba11d554299294a54aa39",
+      "question": "What Danish sports club based in Copenhagen  did striker Søren Lindsted start his career at?",
+      "gold_answer": "Søren Lindsted",
+      "baseline_answer": "**Kjøbenhavns Boldklub (KB), also known as KB.**\n\nAccording to the available documents, Danish striker Søren Lindsted (born February 2, 1957) began his career as a semi-professional with Holbæk Boldklub (reaching the 1976 Danish Cup final and serving as top scorer in 1977–1978). He later played professionally abroad (FC Twente 1979–1982, plus Belgian clubs KFC Winterslag and RFC de Liège), returned to Holbæk in 1985, and then played a single season with KB before ending his career back at Holbæk in 1990.\n\nKB is explicitly described in the same source material as a Danish sports club based in Copenhagen (founded 26 April 1876; one of the oldest football clubs on continental Europe, also featuring cricket, tennis, badminton, swimming, and petanque).\n\nNo other Copenhagen-based club is linked to the start (or any other part) of his career in the documents. Holbæk Boldklub itself is not described as Copenhagen-based. The documents therefore identify KB as the (only) Copenhagen club associated with him, even though it was not his first club.",
+      "task_list_answer": "**Holbæk Boldklub (also referred to as Holbæk)**\n\nAccording to the documents, Søren Lindsted (born February 2, 1957), a Danish former football striker, “started his career as a semi-professional with holbæk boldklub, reaching the 1976 danish cup final and was the team top goalscorer in 1977 and 1978.” He later signed with FC Twente (Netherlands, 1979–1982), played for Belgian clubs KFC Winterslag and RFC de Liège, returned to Holbæk in 1985, then “played a single season with kb” (Kjøbenhavns Boldklub / KB), before ending his career back at Holbæk in 1990.\n\nKB is explicitly described as “a danish sports club based in copenhagen,” but the documents state Lindsted only played one season there later in his career, not that he started there. No document states Holbæk Boldklub’s location or confirms it is based in Copenhagen; the only club matching the “based in Copenhagen” description that he is linked to is KB (later in his career). The direct evidence for where he *started* his career is Holbæk Boldklub.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 9,
+      "task_list_loops": 14,
+      "baseline_retrieved_tokens": 4635,
+      "task_list_retrieved_tokens": 9049,
+      "task_state_updates": 13,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which club did striker Søren Lindsted start his career at?",
+            "completion_criterion": "Søren Lindsted started his career at [club name]",
+            "status": "completed",
+            "answer": "Holbæk Boldklub",
+            "evidence_quote": "he started his career as a semi - professional with holbæk boldklub",
+            "evidence_chunk_ids": [
+              "270",
+              "271"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Is that club a Danish sports club based in Copenhagen?",
+            "completion_criterion": "[club name] is a Danish sports club based in Copenhagen",
+            "status": "completed",
+            "answer": "No evidence; KB is the Copenhagen club he later played for",
+            "evidence_quote": "kjøbenhavns boldklub or kb is a danish sports club based in copenhagen",
+            "evidence_chunk_ids": [
+              "270"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "What is the club?",
+            "completion_criterion": "The club is Holbæk Boldklub",
+            "status": "completed",
+            "answer": "Holbæk Boldklub",
+            "evidence_quote": "he started his career as a semi - professional with holbæk boldklub",
+            "evidence_chunk_ids": [
+              "270",
+              "271"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of Danish sports club based in Copenhagen",
+        "candidate_answer": "Holbæk Boldklub",
+        "candidate_evidence_chunk_ids": [
+          "270",
+          "271"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae163b3554299422ee99678",
+      "question": "Who wrote Bring Me Sunshine and where did they write it?",
+      "gold_answer": "Bring Me Sunshine (1994) was originally a three-part retrospective in tribute to Eric Morecambe",
+      "baseline_answer": "**Sylvia Dee wrote the lyrics to \"Bring Me Sunshine.\"**\n\nThis is stated directly in the biographical details for Sylvia Dee (born Josephine Moore Proffitt, October 22, 1914 – June 12, 1967), an American lyricist and novelist. She is noted as best known for the lyrics to \"Too Young\" (a hit for Nat King Cole), \"The End of the World\" (a hit for Skeeter Davis), and \"Bring Me Sunshine.\" She was born in Little Rock, Arkansas, educated at the University of Michigan, worked as a newspaper copywriter in Rochester, New York, and joined ASCAP in 1943. Her musical collaborators included Sidney Lippman, Arthur Kent, Elizabeth Evelyn Moore, George Goehring, Al Frisch, and Guy Wood.\n\nThe documents do not specify who wrote the music (though Arthur Kent is listed among her collaborators and is the traditional co-writer in other sources outside this corpus) or the location where the song was written. \"Bring Me Sunshine\" is also referenced as the signature tune associated with the British comedy duo Morecambe and Wise (and related tributes/concerts), but no further authorship or composition-location details appear.\n\nEvidence is limited to the above from the available document chunks.",
+      "task_list_answer": "**Sylvia Dee wrote the lyrics to “Bring Me Sunshine”; the documents do not state where the song was written.**\n\nFrom the available documents (specifically Chunk 57, which has been fully read), Sylvia Dee (born Josephine Moore Proffitt, October 22, 1914 – June 12, 1967) is identified as an American lyricist best known for writing the lyrics to “Too Young,” “The End of the World,” and “Bring Me Sunshine.” The same chunk lists her musical collaborators (including Arthur Kent and others) and notes she was born in Little Rock, Arkansas, educated at the University of Michigan, and worked as a copywriter in Rochester, New York, but it does not state the place of composition for this particular song, nor does it credit a music composer for it. No other retrieved or read chunks assert the full writer credit or any writing location.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 8,
+      "task_list_loops": 14,
+      "baseline_retrieved_tokens": 13205,
+      "task_list_retrieved_tokens": 16578,
+      "task_state_updates": 13,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who wrote Bring Me Sunshine?",
+            "completion_criterion": "Document states the name of the writer(s) of Bring Me Sunshine",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "2",
+            "question": "Where did they write Bring Me Sunshine?",
+            "completion_criterion": "Document states the location where Bring Me Sunshine was written",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "Names of writer(s) and location of writing",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "too young Sylvia Dee"
+        }
+      }
+    },
+    {
+      "qid": "5a72224755429971e9dc92be",
+      "question": "Which was founded first, Dain Rauscher Wessels or Berenberg Bank?",
+      "gold_answer": "Dain Rauscher Wessels",
+      "baseline_answer": "**Berenberg Bank was founded first.**\n\nAccording to the documents:\n\n- **Berenberg Bank** (full name Joh. Berenberg, Gossler & Co. KG) was founded in 1590 in Hamburg by the Belgian-origin Berenberg family (brothers Hans and Paul Berenberg, Protestant refugees from Antwerp). It has operated continuously since then under the same legal identity and owning family, making it the world’s oldest surviving merchant bank.\n\n- **Dain Rauscher Wessels** was a Minneapolis-based brokerage and investment banking firm whose origins trace to a number of smaller regional securities firms founded in the 1920s and 1930s. It later became part of RBC Dain Rauscher after its 2001 acquisition by the Royal Bank of Canada (and was subsequently rebranded).\n\nBerenberg Bank predates Dain Rauscher Wessels by more than 300 years.",
+      "task_list_answer": "**Berenberg Bank**\n\nBerenberg Bank (Joh. Berenberg, Gossler & Co. KG) was founded in 1590 by the Berenberg family in Hamburg.\n\nDain Rauscher Wessels (a Minneapolis-based brokerage and investment banking firm) traced its origins to smaller regional securities firms founded in the 1920s and 1930s.\n\nThus, Berenberg Bank was founded centuries earlier.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 4,
+      "task_list_loops": 9,
+      "baseline_retrieved_tokens": 6369,
+      "task_list_retrieved_tokens": 6939,
+      "task_state_updates": 7,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "When was Dain Rauscher Wessels founded?",
+            "completion_criterion": "Dain Rauscher Wessels was founded in YEAR",
+            "status": "completed",
+            "answer": "origins in the 1920s and 1930s",
+            "evidence_quote": "the firm traced its origins to a number of smaller regional securities firms founded in the 1920s and 1930s.",
+            "evidence_chunk_ids": [
+              "371"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "When was Berenberg Bank founded?",
+            "completion_criterion": "Berenberg Bank was founded in YEAR",
+            "status": "completed",
+            "answer": "1590",
+            "evidence_quote": "joh. berenberg, gossler & co. kg, commonly known as berenberg bank, is a hamburg - based multinational investment banking and private banking company, founded by the belgian - origined berenberg family in 1590.",
+            "evidence_chunk_ids": [
+              "371"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which of Dain Rauscher Wessels or Berenberg Bank was founded first?",
+            "completion_criterion": "The earlier-founded firm is NAME based on founding years",
+            "status": "completed",
+            "answer": "Berenberg Bank",
+            "evidence_quote": "founded by the belgian - origined berenberg family in 1590. ... the firm traced its origins to a number of smaller regional securities firms founded in the 1920s and 1930s.",
+            "evidence_chunk_ids": [
+              "371"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of the firm founded first",
+        "candidate_answer": "Berenberg Bank",
+        "candidate_evidence_chunk_ids": [
+          "371"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a82edae55429966c78a6a9f",
+      "question": "Swiss music duo Double released their best known single \"The Captain of Her Heart\" in what year?",
+      "gold_answer": "1986",
+      "baseline_answer": "**1985**\n\nAccording to the document sources, \"The Captain of Her Heart\" is a single by the Swiss duo Double (pronounced \"doo-blay\"), released in 1985 and taken from their 1985 debut full-length album *Blue*. It is a ballad that became their best-known/international hit (reaching No. 8 in the UK and No. 16 on the Billboard Hot 100), making them the first Swiss act to reach the US Top 40. One passage notes its immediate European success upon a 1986 single release (and the frontman Kurt Maloo’s international breakthrough that year), but the primary statements consistently identify the single (and album) as from 1985.\n\nNo other documents in the corpus contradict this or provide a different year.",
+      "task_list_answer": "**1985**\n\nAccording to the documents, “The Captain of Her Heart” is a single by the Swiss duo Double released in 1985. It was taken from their 1985 album *Blue*. The song achieved international success (including chart hits in the UK and US), with some references noting European success upon a 1986 single release and Kurt Maloo’s international breakthrough that year, but the primary statements identify the single (and album) release as 1985.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 4,
+      "task_list_loops": 7,
+      "baseline_retrieved_tokens": 3209,
+      "task_list_retrieved_tokens": 7835,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "In what year did Swiss music duo Double release their best known single \"The Captain of Her Heart\"?",
+            "completion_criterion": "Double released \"The Captain of Her Heart\" in YEAR",
+            "status": "completed",
+            "answer": "1985",
+            "evidence_quote": "\" the captain of her heart \" is a single by the swiss duo double in 1985",
+            "evidence_chunk_ids": [
+              "440"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Resolve any date conflict between 1985 and 1986 for the single release",
+            "completion_criterion": "The release year of the single is clarified as YEAR",
+            "status": "completed",
+            "answer": "1985 (album and single release; 1986 refers to international success)",
+            "evidence_quote": "Taken from their 1985 album \" blue \", the song is a ballad... which was an immediate success throughout europe upon its 1986 single release",
+            "evidence_chunk_ids": [
+              "440"
+            ]
+          }
+        ],
+        "expected_answer_type": "year",
+        "candidate_answer": "1985",
+        "candidate_evidence_chunk_ids": [
+          "440"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ade89d855429975fa854ef7",
+      "question": "In 2008, who were the two actors stared along with a South Korean actor, singer, and model who won best actor in five prestigious award ceremonies.",
+      "gold_answer": "Best Actor prize",
+      "baseline_answer": "**Song Kang-ho and Jung Woo-sung.**\nThey co-starred with Lee Byung-hun (a South Korean actor, singer, and model) in the 2008 film *The Good, the Bad, the Weird*, directed by Kim Jee-woon.\nLee Byung-hun is explicitly described in the documents as a South Korean actor, singer, and model who received critical acclaim for roles including this 2008 film (among others). His film *Inside Men* (2015) won him Best Actor at three prestigious ceremonies (Baeksang Arts Awards, Blue Dragon Film Awards, and Grand Bell Awards), a feat unbroken since 2004; he also has five films (including the 2008 one) among South Korea’s highest-grossing. The question’s “five” appears to loosely reference these details, but the 2008 co-stars are clearly Song Kang-ho and Jung Woo-sung.",
+      "task_list_answer": "**Song Kang-ho and Jung Woo-sung.**\n\nLee Byung-hun (born July 12, 1970) is the South Korean actor, singer, and model described. The source states that his film *Inside Men* (2015) won him the Best Actor prize in three prestigious award ceremonies (52nd Baeksang Arts Awards, 37th Blue Dragon Film Awards, and 53rd Grand Bell Awards)—a feat unbroken since 2004 (the question’s “five” is a minor discrepancy, but the rest of the description matches uniquely).\n\nIn 2008, he starred in the South Korean action western *The Good, the Bad, the Weird* (directed by Kim Jee-woon), alongside Song Kang-ho and Jung Woo-sung.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 10,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 9889,
+      "task_list_retrieved_tokens": 14489,
+      "task_state_updates": 6,
+      "task_state_complete": true,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is the South Korean actor, singer, and model who won best actor in five prestigious award ceremonies?",
+            "completion_criterion": "Named person is South Korean actor/singer/model who won Best Actor in five prestigious awards",
+            "status": "completed",
+            "answer": "Lee Byung-hun",
+            "evidence_quote": "lee byung - hun ( korean : 이병헌 ; born july 12, 1970 ) is a south korean actor, singer and model. ... his critically acclaimed film \" inside men \" ( 2015 ) won him the best actor prize in three prestigious award ceremonies : 52nd baeksang art awards, 37th blue dragon awards and 53rd grand bell awards — a feat that was unbroken since 2004",
+            "evidence_chunk_ids": [
+              "368"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "In 2008, what project did this person star in, and with which two actors?",
+            "completion_criterion": "Two actor names who co-starred with the person in a 2008 project",
+            "status": "completed",
+            "answer": "Song Kang-ho and Jung Woo-sung",
+            "evidence_quote": "the good, the bad, the weird ( ) is a 2008 south korean action western film, directed by kim jee - woon, starring song kang - ho, lee byung - hun, and jung woo - sung.",
+            "evidence_chunk_ids": [
+              "369"
+            ]
+          }
+        ],
+        "expected_answer_type": "Two actor names",
+        "candidate_answer": "Song Kang-ho and Jung Woo-sung",
+        "candidate_evidence_chunk_ids": [
+          "368",
+          "369"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a8b4d5e5542995d1e6f135c",
+      "question": "What Congressional District did John Shimkus represent before the 20th Congressional District of Illinois?",
+      "gold_answer": "Illinois 's 15 congressional district",
+      "baseline_answer": "**None (the 20th was his first Congressional District).**\n\nThe documents indicate that John Shimkus (full name John Mondy Shimkus, born February 21, 1958) has served as a U.S. Representative since 1997. The 20th Congressional District of Illinois was eliminated as a result of the 2000 census, and it was last represented by him before he was redistricted into the 19th district. The 19th was later eliminated (for the 113th Congress starting in 2013) and he was redistricted to the 15th, which he has represented (with the bio noting continuous service since 1997, consistent with renumbering/redistricting of his original seat). No earlier congressional district is mentioned for him.\n\nThis is supported by the district histories and his biographical details in the retrieved chunks; nothing in the corpus describes representation of any district prior to the 20th.",
+      "task_list_answer": "**None (the 20th was his first).**\n\nJohn Mondy Shimkus (born February 21, 1958) has been a U.S. Representative since 1997. He first represented Illinois’s 20th Congressional District (eliminated after the 2000 census, as he was its last representative and was redistricted into the 19th). He later represented the 19th (until it became obsolete for the 113th Congress after the 2010 census, when he was redistricted to the 15th) and has represented the 15th since then. No earlier congressional district is mentioned in connection with him.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 8,
+      "task_list_loops": 11,
+      "baseline_retrieved_tokens": 7736,
+      "task_list_retrieved_tokens": 6789,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What Congressional District did John Shimkus represent before the 20th of Illinois?",
+            "completion_criterion": "John Shimkus previously represented X Congressional District of Illinois before the 20th.",
+            "status": "completed",
+            "answer": "None; the 20th was his first congressional district",
+            "evidence_quote": "john mondy shimkus (, born february 21, 1958 ) is the u. s. representative for illinois's 15 congressional district, since 1997. ... the 20th congressional district of illinois was a congressional district for the united states house of representatives in illinois. it was eliminated as a result of the 2000 census. it was last represented by john shimkus who was redistricted into the 19th district.",
+            "evidence_chunk_ids": [
+              "362",
+              "361"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What districts did John Shimkus represent and in what order?",
+            "completion_criterion": "Sequence of Illinois congressional districts represented by John Shimkus.",
+            "status": "completed",
+            "answer": "20th (from 1997 until eliminated after 2000 census), then 19th, then 15th",
+            "evidence_quote": "the 20th congressional district of illinois ... it was last represented by john shimkus who was redistricted into the 19th district. the 19th congressional district of illinois ... it was last represented by republican john shimkus, who was redistricted to the 15th district. john mondy shimkus ... is the u. s. representative for illinois's 15 congressional district, since 1997.",
+            "evidence_chunk_ids": [
+              "361",
+              "362"
+            ]
+          }
+        ],
+        "expected_answer_type": "None or district number",
+        "candidate_answer": "None (20th was his first)",
+        "candidate_evidence_chunk_ids": [
+          "361",
+          "362"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae0ac1c5542993d6555ec07",
+      "question": "Between Gareth Evans and Pierre Chenal, who's had a more diver career?",
+      "gold_answer": "Gareth Huw Evans",
+      "baseline_answer": "**Pierre Chenal had a more diverse career.**\n\nBased on the available documents:\n\n### Pierre Chenal\n- French director and screenwriter (born December 5, 1904; died December 23, 1990) who flourished in the 1930s.\n- Directed a range of films in France, including literary adaptations and crime dramas such as *Crime and Punishment* (*Crime et châtiment*, 1935), *The Man from Nowhere* (*L’Homme de nulle part*, 1937, based on Luigi Pirandello’s novel), *L’Alibi* (1937), *The Lafarge Case* (*L’Affaire Lafarge*, 1938), and *Le Dernier tournant* (*The Last Turning*, 1939, an early adaptation of *The Postman Always Rings Twice*).\n- Later worked in Argentina/Latin America: *Todo un hombre* (“What a Man,” 1943, his Latin film debut), *Viaje sin regreso* (1946), and *Native Son* (*Sangre negra*, 1951, a black-and-white Argentine film).\n- Career spanned multiple countries (France and Argentina), languages/cultures, decades (1930s–1950s), and genres (crime drama, literary adaptations, romantic drama).\n\n### Gareth Huw Evans\n- Welsh film director, screenwriter, film editor, and action choreographer (born 1980).\n- The documents provide only this brief description and no specific films, international work, genre variety, or other details.\n\nPierre Chenal’s documented work shows greater geographic, cultural, temporal, and genre diversity. Gareth Evans is noted for holding multiple creative roles, but the sources contain far less evidence of a varied career overall.",
+      "task_list_answer": "**Gareth Evans (Gareth Huw Evans) has had the more diverse career.**\n\nAccording to the documents:\n\n- Gareth Huw Evans (born 1980) is a Welsh film director, screenwriter, film editor, and action choreographer. This covers four distinct professional roles within filmmaking.\n\n- Pierre Chenal (December 5, 1904 – December 23, 1990) was a French director and screenwriter who flourished in the 1930s. He directed multiple films, including French works such as *Le Dernier Tournant* (1939), *Crime and Punishment* (1935), *The Man from Nowhere* (1937), *L'Alibi* (1937), and *The Lafarge Case* (1938), as well as Argentine films such as *Native Son*/*Sangre Negra* (1951), *Viaje sin regreso* (1946), and *Todo un hombre* (1943, his Latin American debut). His documented roles are primarily director and screenwriter, with geographic range across France and Argentina over decades.\n\nGareth Evans’ career is more diverse in the breadth of creative and technical roles (directing + writing + editing + action choreography), while Pierre Chenal’s is broader in time span and international locations but more narrowly focused on directing and screenwriting. The available document evidence supports Gareth Evans as having the more multi-faceted set of professional capacities.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "genuine_improvement",
+      "manual_note": "职业维度比较由 Pierre Chenal 修正为 Gareth Huw Evans。",
+      "baseline_loops": 7,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 6086,
+      "task_list_retrieved_tokens": 6933,
+      "task_state_updates": 4,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What are the main aspects of Gareth Evans' career?",
+            "completion_criterion": "Gareth Evans career spans specific fields or roles",
+            "status": "completed",
+            "answer": "Welsh film director, screenwriter, film editor and action choreographer",
+            "evidence_quote": "gareth huw evans ( born 1980 ) is a welsh film director, screenwriter, film editor and action choreographer.",
+            "evidence_chunk_ids": [
+              "486",
+              "487"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What are the main aspects of Pierre Chenal's career?",
+            "completion_criterion": "Pierre Chenal career spans specific fields or roles",
+            "status": "completed",
+            "answer": "French director and screenwriter who flourished in the 1930s; directed multiple films in France and Argentina",
+            "evidence_quote": "pierre chenal ( ] ; december 5, 1904 – december 23, 1990 ) was a french director and screenwriter who flourished in the 1930s.",
+            "evidence_chunk_ids": [
+              "486",
+              "487"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which of Gareth Evans and Pierre Chenal has a more diverse career?",
+            "completion_criterion": "Comparison of career diversity between Gareth Evans and Pierre Chenal",
+            "status": "completed",
+            "answer": "Gareth Evans",
+            "evidence_quote": "gareth huw evans ( born 1980 ) is a welsh film director, screenwriter, film editor and action choreographer.",
+            "evidence_chunk_ids": [
+              "486",
+              "487"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of the person with more diverse career",
+        "candidate_answer": "Gareth Evans",
+        "candidate_evidence_chunk_ids": [
+          "486",
+          "487"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5abbc96755429931dba1452c",
+      "question": "How many records had the team sold before performing \"aint thinkin' 'bout you\"?",
+      "gold_answer": "three million copies worldwide",
+      "baseline_answer": "**The available documents do not contain this information.**\n\nThe only mention of the song is in chunk 489, which briefly notes:  \n“‘ain’t thinkin’’ bout you’ is a song by rapper bow wow. this song features chris brown. an early version originally appeared on brown’s collaborative mixtape with tyga, ‘fan of a fan’.”  \n\nNo sales figures, no reference to “the team,” and no statement about records sold before any performance of the song appear in that chunk or any other retrieved material. Searches for combinations of “the team,” “records sold,” “performing,” and variations of the song title only returned unrelated sports teams or other music acts with no connection to the query.  \n\nThus, the documents provide no basis for determining how many records “the team” had sold before performing the song.",
+      "task_list_answer": "**The documents do not provide this information.**\n\nThe only relevant fact found is that “Ain’t Thinkin’ ’Bout You” is a song by rapper Bow Wow featuring Chris Brown (an early version appeared on Chris Brown and Tyga’s mixtape *Fan of a Fan*). No document states any number of records sold by Bow Wow, Chris Brown, “the team,” or any related act *before* performing or releasing that song. No other matching artist/group or sales figure appears in connection with the performance.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 15,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 23148,
+      "task_list_retrieved_tokens": 33282,
+      "task_state_updates": 8,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What team/group performed 'aint thinkin' 'bout you'?",
+            "completion_criterion": "Document states the name of the team or artist that performed the song Ain't Thinkin' 'Bout You",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "2",
+            "question": "How many records had the team sold before performing that song?",
+            "completion_criterion": "Document states the number of records sold by the team prior to performing Ain't Thinkin' 'Bout You",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "number of records sold",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "fan of a fan"
+        }
+      }
+    },
+    {
+      "qid": "5a7e3b585542995ed0d166df",
+      "question": "Which film was released first, Home on the Range or Pete's Dragon?",
+      "gold_answer": "Home on the Range",
+      "baseline_answer": "**Pete's Dragon (the original 1977 film) was released first.**\n\nFrom the documents:\n- *Home on the Range* is a 2004 American animated musical western comedy film produced by Walt Disney Feature Animation and released by Walt Disney Pictures (the 45th Disney animated feature film).\n- *Pete's Dragon* (2016) is described as an American fantasy comedy-drama adventure film that is a reboot of the **1977 musical film of the same name**. The documents also reference the original *Pete's Dragon* in the context of older Disney classics releases (alongside films like *Mary Poppins*).\n\nThe 1977 original *Pete's Dragon* predates *Home on the Range* (2004) by decades; the 2016 remake is later. The documents do not provide more precise day/month dates but establish the years clearly.",
+      "task_list_answer": "**Pete's Dragon (the 1977 original) was released first.**\n\nEvidence from the documents:\n- *Home on the Range* is a 2004 American animated musical western comedy film produced by Walt Disney Feature Animation and released by Walt Disney Pictures.\n- *Pete's Dragon* (2016) is a reboot of the 1977 musical film of the same name. The 2016 version is an American fantasy comedy-drama adventure film.\n\nThe original *Pete's Dragon* (1977) therefore predates *Home on the Range* (2004). Even comparing only the 2016 remake would reverse the order, but the documents establish the 1977 film as the original under that title, making it the earlier release.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 8,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 3120,
+      "task_list_retrieved_tokens": 12063,
+      "task_state_updates": 7,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the release date of Home on the Range?",
+            "completion_criterion": "Home on the Range released on exact date or year",
+            "status": "completed",
+            "answer": "2004",
+            "evidence_quote": "home on the range is a 2004 american animated musical western comedy film produced by walt disney feature animation and released by walt disney pictures.",
+            "evidence_chunk_ids": [
+              "528"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the release date of Pete's Dragon?",
+            "completion_criterion": "Pete's Dragon released on exact date or year",
+            "status": "completed",
+            "answer": "1977 (original) and 2016 (reboot)",
+            "evidence_quote": "the film is a reboot of the 1977 musical film of the same name written by malcolm marmorstein. pete's dragon is a 2016 american fantasy comedy - drama adventure film",
+            "evidence_chunk_ids": [
+              "527"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which film was released earlier?",
+            "completion_criterion": "Comparison showing one film released before the other",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "film title",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "semantic_search",
+          "query": "Home on the Range 2004 release"
+        }
+      }
+    },
+    {
+      "qid": "5a83aaeb5542996488c2e483",
+      "question": "What studio album did Kanye West record with Roc-A-Fella Records and soul singer Dwele?",
+      "gold_answer": "My Beautiful Dark Twisted Fantasy",
+      "baseline_answer": "**Graduation**\n\nGraduation is the third studio album by American rapper Kanye West. It was released on September 11, 2007, through Roc-A-Fella Records. Recording sessions took place from 2005 to 2007, primarily produced by West (with contributions from others). It features guest contributions from artists including Mos Def, Dwele (soul singer), T-Pain, Lil Wayne, DJ Premier, and Chris Martin of Coldplay. Dwele appears on tracks such as “Flashing Lights” (where he provides featured vocals).\n\nThis matches the query based on the document details about the album’s label and Dwele’s involvement (other West albums on Roc-A-Fella, like *The College Dropout* or *Late Registration*, do not list him as a featured guest in the same way).",
+      "task_list_answer": "**Graduation**\n\nGraduation is the third studio album by Kanye West. It was released on September 11, 2007, through Roc-A-Fella Records. Recording sessions took place during 2005 to 2007, and it features guest contributions from artists including Mos Def, Dwele, T-Pain, Lil Wayne, DJ Premier, and Chris Martin of Coldplay.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 3,
+      "task_list_loops": 6,
+      "baseline_retrieved_tokens": 3175,
+      "task_list_retrieved_tokens": 2759,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which Kanye West studio albums were released on Roc-A-Fella Records?",
+            "completion_criterion": "Document states Kanye West studio album X was recorded/released with/on Roc-A-Fella Records",
+            "status": "completed",
+            "answer": "Graduation, The College Dropout, Late Registration, My Beautiful Dark Twisted Fantasy",
+            "evidence_quote": "graduation is the third studio album by american rapper kanye west. it was released on september 11, 2007, through roc - a - fella records. ... the college dropout is the debut studio album by american rapper kanye west. it was released on february 10, 2004, through roc - a - fella records. ... my beautiful dark twisted fantasy is the fifth studio album by american rapper kanye west, released, november 22, 2010, by roc - a - fella records. ... late registration is the second studio album by american rapper kanye west. it was released on august 30, 2005, through roc - a - fella records.",
+            "evidence_chunk_ids": [
+              "622"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which Kanye West album features soul singer Dwele?",
+            "completion_criterion": "Document states Kanye West album X features/involves soul singer Dwele",
+            "status": "completed",
+            "answer": "Graduation",
+            "evidence_quote": "it features guest contributions from artists, including mos def, dwele, t - pain, lil wayne, dj premier and chris martin of coldplay.",
+            "evidence_chunk_ids": [
+              "622"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "What studio album did Kanye West record with Roc-A-Fella Records and soul singer Dwele?",
+            "completion_criterion": "Document states album X was recorded by Kanye West with Roc-A-Fella and Dwele",
+            "status": "completed",
+            "answer": "Graduation",
+            "evidence_quote": "graduation is the third studio album by american rapper kanye west. it was released on september 11, 2007, through roc - a - fella records. ... it features guest contributions from artists, including mos def, dwele, t - pain, lil wayne, dj premier and chris martin of coldplay.",
+            "evidence_chunk_ids": [
+              "622"
+            ]
+          }
+        ],
+        "expected_answer_type": "studio album name",
+        "candidate_answer": "Graduation",
+        "candidate_evidence_chunk_ids": [
+          "622"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5abd516a5542992ac4f3825c",
+      "question": "What religion is the composer for India's first science fiction film series?",
+      "gold_answer": "Hindi",
+      "baseline_answer": "**Hindu (inferred from name and common knowledge of the family, but not explicitly stated in the documents).**\n\nThe Krrish film series (starting with *Koi... mil gaya* in 2003) is identified as India’s first sci-fi/superhero film series. It was scored by Rajesh Roshan (full name given as Raajesh Rooshan Lal Nagrath), the brother of director Rakesh Roshan.\n\nThe documents provide no explicit statement of his religion (or that of the Roshan family). His name and background as a prominent Hindi-cinema composer of Punjabi origin are consistent with Hindu identity, which is the widely known affiliation of the family, but this is not confirmed in the retrieved corpus. No other religion (Muslim, Christian, etc.) is associated with him in the sources.",
+      "task_list_answer": "**Hinduism (or Hindu), though this is not directly stated in the documents for the composer.**\n\nFrom the retrieved and read documents:\n\n- India's first science fiction (sci-fi/superhero) film series is the Krrish franchise (also called the Krrish film series). Chunk 560 states: “in 2003, the blockbuster film ‘koi… mil gaya’ marked the beginning of the successful krrish film series, which is the first sci-fi / superhero film series in indian cinema.” Chunk 561 confirms: “krrish is a franchise of indian science fiction films, superhero films… It is considered indian cinema’s first such film series.”\n\n- The composer/scorer for the series (all three films) is Rajesh Roshan (full name given as Raajesh Rooshan Lal Nagrath, born 24 May 1955). Chunk 561 states: “All three films starred rakesh’s son hrithik roshan, and were scored by his brother rajesh roshan.” Chunk 560 identifies him as “raajesh rooshan lal nagrath… a hindi cinema music composer. he is the son of music director roshan, younger brother of filmmaker rakesh roshan and the uncle of actor hrithik roshan.”\n\nNo read chunk directly states Rajesh Roshan’s (or the Roshan family’s) religion. Multiple searches (semantic and keyword) for variants of his name + “religion,” “Hindu,” family background, or related terms returned no chunks asserting the subject-relation-object fact “Rajesh Roshan’s religion is X.” The documents only cover his professional role and family ties within Hindi cinema. Therefore no evidence quote or chunk ID can complete the third subtask under the required criterion, and the religion cannot be grounded solely in the provided corpus without speculation.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 11,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 10789,
+      "task_list_retrieved_tokens": 10570,
+      "task_state_updates": 9,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is India's first science fiction film series?",
+            "completion_criterion": "Document states the name of India's first science fiction film series",
+            "status": "completed",
+            "answer": "Krrish film series",
+            "evidence_quote": "krrish is a franchise of indian science fiction films... it is considered indian cinema's first such film series.",
+            "evidence_chunk_ids": [
+              "561"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Who composed the music for India's first science fiction film series?",
+            "completion_criterion": "Document states the composer of that film series",
+            "status": "completed",
+            "answer": "Rajesh Roshan",
+            "evidence_quote": "All three films starred rakesh's son hrithik roshan, and were scored by his brother rajesh roshan.",
+            "evidence_chunk_ids": [
+              "561"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "What religion is that composer?",
+            "completion_criterion": "Document states the religion of the composer",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "religion name",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "semantic_search",
+          "query": "religion of music composer Rajesh Roshan or Raajesh Rooshan"
+        }
+      }
+    },
+    {
+      "qid": "5ac2f1d1554299218029dba4",
+      "question": "What is in both the Lithocarpus and Duranta species?",
+      "gold_answer": "trees",
+      "baseline_answer": "**Candicine (a quaternary ammonium alkaloid / phenethylamine derivative).**\n\nFrom the retrieved documents (primarily chunk 897 on candicine, cross-referenced with the plant descriptions in chunks 555–556), candicine is a naturally occurring organic compound (N,N,N-trimethyltyramine) classed as an alkaloid. It occurs in a variety of plants. Although the candicine chunk text is truncated after mentioning barley, the co-occurrence of Lithocarpus (Fagaceae; stone oaks / trees such as *L. densiflorus*, *L. glaber*, *L. kostermansii*, *L. crassinervius*, *L. platycarpus*) and Duranta (Verbenaceae; shrubs/small trees such as *D. erecta*) in the corpus and question context establishes it as the shared constituent present in species of both genera. No other shared chemical, trait, or substance is documented between them.",
+      "task_list_answer": "**Candicine (a quaternary ammonium alkaloid / natural product).**\n\nBoth Lithocarpus and Duranta are plant genera (Lithocarpus in Fagaceae with tree species such as *L. kostermansii*, *L. crassinervius*, *L. glaber*, and *L. platycarpus*; Duranta in Verbenaceae with shrub/tree species such as *D. erecta*). The documents describe candicine as a naturally occurring organic compound (N,N,N-trimethyltyramine derivative, classed as an alkaloid) found in a variety of plants.\n\nNo other shared entity, compound, property, or relation (e.g., family, habitat, conservation status, or associated fungus/herbicide) is directly asserted for both in the retrieved chunks.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 15,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 13835,
+      "task_list_retrieved_tokens": 14934,
+      "task_state_updates": 2,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is associated with Lithocarpus species?",
+            "completion_criterion": "Document states a specific entity or property present in Lithocarpus species",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "2",
+            "question": "What is associated with Duranta species?",
+            "completion_criterion": "Document states a specific entity or property present in Duranta species",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "3",
+            "question": "What is common to both Lithocarpus and Duranta species?",
+            "completion_criterion": "Document states an entity or property that is in both Lithocarpus and Duranta species",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "entity or property common to both",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "read_chunk",
+          "query": "555 556"
+        }
+      }
+    },
+    {
+      "qid": "5a729cc25542991f9a20c532",
+      "question": "Which author wrote about a woman captured by the Symbionese Liberation Army?",
+      "gold_answer": "Paul Avery",
+      "baseline_answer": "**Susan Choi** wrote the 2003 novel *American Woman*, which is based on the 1974 kidnapping of Patty Hearst (a young heiress) by the Symbionese Liberation Army (SLA). It was a finalist for the 2004 Pulitzer Prize for Fiction.\n\nThis is confirmed in the source documents, which describe the novel as fictionalizing the SLA kidnapping and Hearst’s subsequent involvement with the group. No other authors in the corpus are described as writing about this specific event in the same way.",
+      "task_list_answer": "**Susan Choi**\n\nShe wrote the 2003 novel *American Woman*, which is based on the 1974 kidnapping of Patty Hearst (Patricia Campbell Hearst) by the Symbionese Liberation Army. The novel was a finalist for the 2004 Pulitzer Prize for Fiction.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 5,
+      "task_list_loops": 5,
+      "baseline_retrieved_tokens": 3398,
+      "task_list_retrieved_tokens": 1571,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is the woman captured by the Symbionese Liberation Army?",
+            "completion_criterion": "Document states a specific woman was captured by the Symbionese Liberation Army",
+            "status": "completed",
+            "answer": "Patty Hearst (Patricia Hearst)",
+            "evidence_quote": "patricia campbell \" patty \" hearst ... hearst was abducted by a small left - wing terrorist group ... known as the symbionese liberation army.",
+            "evidence_chunk_ids": [
+              "765"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which author wrote about that woman?",
+            "completion_criterion": "Document states a specific author wrote about the woman captured by the SLA",
+            "status": "completed",
+            "answer": "Susan Choi",
+            "evidence_quote": "american woman is a 2003 novel written by the american writer susan choi ... the novel is based on the 1974 kidnapping of patty hearst by radicals of the symbionese liberation army.",
+            "evidence_chunk_ids": [
+              "765"
+            ]
+          }
+        ],
+        "expected_answer_type": "author name",
+        "candidate_answer": "Susan Choi",
+        "candidate_evidence_chunk_ids": [
+          "765"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "Susan Choi American Woman"
+        }
+      }
+    },
+    {
+      "qid": "5ae3d67f5542992f92d8238f",
+      "question": "The man who currently serves as the wide receivers coach for the Dallas Cowboys used to coach at what college?",
+      "gold_answer": "Louisiana Tech",
+      "baseline_answer": "**Louisiana Tech University (Louisiana Tech Bulldogs).**\n\nDerek Dooley (born June 10, 1968) is the man who currently serves as the wide receivers coach for the Dallas Cowboys of the NFL. Document evidence shows he previously coached at Louisiana Tech University, where he was the head coach of the Louisiana Tech Bulldogs football team (in at least his second year with the program as of the 2008 season, after a 5–7 record in 2007).",
+      "task_list_answer": "**Louisiana Tech University (or Louisiana Tech).**\n\nDerek Dooley currently serves as the wide receivers coach for the Dallas Cowboys. He previously coached (as head coach) at Louisiana Tech University, including the 2008 Louisiana Tech Bulldogs football team (his second year with the program).",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "baseline_answer_already_correct",
+      "manual_note": "Louisiana Tech 原答案已与 Gold 等价；本次 judge 改判正确。",
+      "baseline_loops": 12,
+      "task_list_loops": 7,
+      "baseline_retrieved_tokens": 10579,
+      "task_list_retrieved_tokens": 2208,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is the current wide receivers coach for the Dallas Cowboys?",
+            "completion_criterion": "Document states the name of the person currently serving as wide receivers coach for the Dallas Cowboys.",
+            "status": "completed",
+            "answer": "Derek Dooley",
+            "evidence_quote": "derek dooley ( born june 10, 1968 ) is an american football coach and former player. he currently serves as the wide receivers coach for the dallas cowboys of the national football league ( nfl ).",
+            "evidence_chunk_ids": [
+              "743"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "At what college did that coach previously coach?",
+            "completion_criterion": "Document states the college where Derek Dooley previously coached.",
+            "status": "completed",
+            "answer": "Louisiana Tech University",
+            "evidence_quote": "the 2008 louisiana tech bulldogs football team represented louisiana tech university in the 2008 ncaa division i fbs football season. ... the team was coached by derek dooley, who was in his second year with the program.",
+            "evidence_chunk_ids": [
+              "743"
+            ]
+          }
+        ],
+        "expected_answer_type": "College name",
+        "candidate_answer": "Louisiana Tech University",
+        "candidate_evidence_chunk_ids": [
+          "743"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a7302b75542991f9a20c5fd",
+      "question": "What supernatural horror film did Miles Doleac have a role in?",
+      "gold_answer": "Sleepy Hollow",
+      "baseline_answer": "**Don't Kill It (2016).**\n\nMiles Doleac (full name Miles Christopher Doleac), an American actor/director/writer/producer, had a supporting role in this comedy-horror film. It was directed and edited by Mike Mendez and stars Dolph Lundgren as Jebediah Woodley, a demon hunter tracking an ancient, homicidal demon in Mississippi. Other supporting cast includes Kristina Klebe, Tony Bentley, and James Chalke. The film’s plot centers on a supernatural demon entity, making it a supernatural (comedy) horror film.\n\nThis is distinct from other projects he worked on, such as the drama *The Historian* (which he wrote/directed/produced/starred in) or the crime film *The Hollow* (which he directed/wrote), neither of which is supernatural horror. He also appeared in horror-related TV like *American Horror Story* and *Sleepy Hollow*, but those are series, not films.",
+      "task_list_answer": "**Don't Kill It (2016)**\n\nMiles Doleac had a supporting acting role in this film. The same source describes *Don't Kill It* as a 2016 comedy horror film directed by Mike Mendez, starring Dolph Lundgren as a demon hunter seeking to destroy an ancient homicidal demon (a clear supernatural element).\n\nNo other supernatural horror *films* featuring Doleac appear in the available documents (he has TV credits such as *American Horror Story* and *Sleepy Hollow*, plus other non-horror films he directed or appeared in such as *The Historian* and *The Hollow*).",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 4,
+      "task_list_loops": 9,
+      "baseline_retrieved_tokens": 4392,
+      "task_list_retrieved_tokens": 4001,
+      "task_state_updates": 7,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What supernatural horror film did Miles Doleac have a role in?",
+            "completion_criterion": "Miles Doleac has a role in Don't Kill It, a comedy horror film involving a demon.",
+            "status": "completed",
+            "answer": "Don't Kill It",
+            "evidence_quote": "he also has acting roles in the recent films \" the magnificent seven \" and \" don't kill it. \" ... don't kill it is a 2016 comedy horror film directed and edited by mike mendez. it stars dolph lundgren as jebediah woodley, a demon hunter who travels to mississippi in the hopes of destroying an ancient, but homicidal demon. kristina klebe, tony bentley, james chalke, and miles doleac all star in supporting roles.",
+            "evidence_chunk_ids": [
+              "652"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Confirm genre of Don't Kill It",
+            "completion_criterion": "Don't Kill It is a comedy horror film involving a demon (supernatural element).",
+            "status": "completed",
+            "answer": "Yes, comedy horror with demon",
+            "evidence_quote": "don't kill it is a 2016 comedy horror film ... a demon hunter who travels to mississippi in the hopes of destroying an ancient, but homicidal demon.",
+            "evidence_chunk_ids": [
+              "652"
+            ]
+          }
+        ],
+        "expected_answer_type": "film title",
+        "candidate_answer": "Don't Kill It",
+        "candidate_evidence_chunk_ids": [
+          "652"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ab82fe155429919ba4e225a",
+      "question": "What is the name of one the Italian Navy's new warship?",
+      "gold_answer": "PPA, Pattugliatore Polivalente d'Altura",
+      "baseline_answer": "**Anteo (A5309)**\n\nAccording to the documents, Anteo (A5309) is a submarine rescue ship of the Italian Navy (Marina Militare), assigned to Raggruppamento Subacquei ed Incursori \"Teseo Tesei\" (COMSUBIN). It is the third ship to bear this name in the Italian Navy. It was built at Cantiere Navale Breda di Porto Marghera and commissioned on 31 July 1980.\n\nThe documents also note that PPA (Pattugliatore Polivalente d'Altura, or Offshore Multipurpose Patrol Ship) is a new frigate class of the Italian Navy, but no specific individual ship names from that class are provided. Other historical Italian Navy vessels (such as the light cruiser Scipione Africano) are mentioned but are not \"new.\" Anteo is the only specifically named Italian Navy warship detailed in the available corpus.",
+      "task_list_answer": "**PPA (Pattugliatore Polivalente d’Altura / Offshore Multipurpose Patrol Ship)**\n\nThis is identified as a new frigate class of the Italian Navy (Marina Militare).\n\nNo individual named hull from this (or any other recent) class is listed in the available documents; Anteo (A5309) is the only specifically named Italian Navy vessel, but it was commissioned in 1980 and is therefore not “new.” The PPA class is the sole item explicitly described as new.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "genuine_improvement",
+      "manual_note": "从无关舰艇 Anteo 修正为直接证据支持的 PPA。",
+      "baseline_loops": 14,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 16224,
+      "task_list_retrieved_tokens": 18281,
+      "task_state_updates": 5,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the name of one new warship of the Italian Navy?",
+            "completion_criterion": "Document states the name of a specific new Italian Navy warship",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "ship name string",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "PPA Italian Navy"
+        }
+      }
+    },
+    {
+      "qid": "5ae78f3b554299540e5a5608",
+      "question": "Mr. & Mrs. Mxyzptlk is an episode of the superhero TV series that originally aired on what network?",
+      "gold_answer": "CBS",
+      "baseline_answer": "**The CW (also known as The CW Television Network).**\n\nThis is based on the document stating that \"Mr. & Mrs. Mxyzptlk\" is the thirteenth episode of the second season of the CW television series *Supergirl*, which aired on February 20, 2017. *Supergirl* is a superhero TV series, and The CW was its original broadcast network.",
+      "task_list_answer": "**CBS**\n\n\"Mr. & Mrs. Mxyzptlk\" is the thirteenth episode of the second season of the superhero TV series *Supergirl*. The series originally aired on CBS (premiering on October 26, 2015).",
+      "baseline_primary_failure_type": "4. 第二跳或后续跳检索失败",
+      "baseline_aggregate_bucket": "agent_tool_decision",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "genuine_improvement",
+      "manual_note": "完成 Supergirl 的第二跳并读取 Chunk 790，由 The CW 修正为 CBS。",
+      "baseline_loops": 3,
+      "task_list_loops": 7,
+      "baseline_retrieved_tokens": 1218,
+      "task_list_retrieved_tokens": 3499,
+      "task_state_updates": 6,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which superhero TV series has the episode \"Mr. & Mrs. Mxyzptlk\"?",
+            "completion_criterion": "Episode \"Mr. & Mrs. Mxyzptlk\" belongs to superhero TV series X",
+            "status": "completed",
+            "answer": "Supergirl",
+            "evidence_quote": "\"mr. & mrs. mxyzptlk\" is the thirteenth episode of the second season from the cw television series \"supergirl\", which aired on february 20, 2017.",
+            "evidence_chunk_ids": [
+              "789"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "On what network did that superhero TV series originally air?",
+            "completion_criterion": "Superhero TV series Supergirl originally aired on network Y",
+            "status": "completed",
+            "answer": "CBS",
+            "evidence_quote": "supergirl is an american superhero action - adventure television series developed by ali adler, greg berlanti and andrew kreisberg ( the latter two having previously created \" arrow \" and \" the flash \" ) that originally aired on cbs and premiered on october 26, 2015.",
+            "evidence_chunk_ids": [
+              "790"
+            ]
+          }
+        ],
+        "expected_answer_type": "network name",
+        "candidate_answer": "CBS",
+        "candidate_evidence_chunk_ids": [
+          "789",
+          "790"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a8fa4d95542995b4424207b",
+      "question": "Which airport is busier, Palm Springs International Airport or Trenton–Mercer Airport?",
+      "gold_answer": "Trenton–Mercer Airport",
+      "baseline_answer": "**Palm Springs International Airport (PSP) and Trenton–Mercer Airport (TTN) cannot be directly compared for busyness based on the available documents, as passenger (or other traffic) statistics are provided only for Trenton–Mercer.**\n\n### Available data from the documents:\n- **Trenton–Mercer Airport** (IATA: TTN/KTTN; also formerly Mercer County Airport): A county-owned, joint civil-military public airport in Ewing Township, Mercer County, New Jersey (about 4 miles northwest of Trenton). It serves two scheduled airlines plus general and corporate aviation. Per U.S. Department of Transportation figures, it handled approximately 399,000 departing and 395,000 arriving passengers between June 2014 and May 2015 (total ~794,000 passengers).\n- **Palm Springs International Airport** (IATA: PSP; formerly Palm Springs Municipal Airport): A public airport 2 miles east of downtown Palm Springs, California. It covers 940 acres and has two runways. It is highly seasonal, with most flights operating during the winter. No passenger numbers, enplanements, operations counts, airline details, or other traffic statistics are given.\n\n\"Busier\" is generally assessed via metrics like annual passenger volume (enplanements + deplanements), aircraft operations, or cargo. The documents supply a clear ~794,000-passenger figure for one recent year for Trenton–Mercer but nothing quantitative for Palm Springs, so no determination of which is busier is possible from the corpus alone. (Note that the chunks appear to be Wikipedia-style excerpts and do not include more recent or comparative data.)",
+      "task_list_answer": "**Palm Springs International Airport cannot be confirmed as busier (or vice versa) from the documents, as no passenger traffic figures are provided for it; Trenton–Mercer Airport handled ~794,000 passengers (June 2014–May 2015).**\n\n- Trenton–Mercer Airport (TTN/KTTN): The U.S. Department of Transportation reports approximately 399,000 passengers departed and 395,000 arrived between June 2014 and May 2015, for a total of 794,000 passengers. It is a county-owned joint civil-military public airport serving two scheduled airlines plus general/corporate aviation.\n\n- Palm Springs International Airport (PSP/KPSP): Described only as a public airport two miles east of downtown Palm Springs, California; covers 940 acres with two runways; highly seasonal, with most flights operating during the winter. No annual passengers, enplanements, or other traffic volume figures appear in the retrieved chunks.\n\nNo document directly compares the two or supplies Palm Springs passenger statistics (or alternative busyness metrics such as operations/flights that would allow a clear ranking). Therefore a definitive determination of which is busier is not possible from the available evidence.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 10,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 11529,
+      "task_list_retrieved_tokens": 17119,
+      "task_state_updates": 8,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the passenger traffic or busyness metric for Palm Springs International Airport?",
+            "completion_criterion": "Document states annual passengers or enplanements for Palm Springs International Airport",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "2",
+            "question": "What is the passenger traffic or busyness metric for Trenton–Mercer Airport?",
+            "completion_criterion": "Document states annual passengers or enplanements for Trenton–Mercer Airport",
+            "status": "completed",
+            "answer": "794,000 passengers between June 2014 and May 2015",
+            "evidence_quote": "the us department of transportation reports that approximately 399, 000 passengers departed and 395, 000 arrived at the airport between june 2014 and may 2015, a total of 794, 000 passengers.",
+            "evidence_chunk_ids": [
+              "701"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which airport has higher passenger traffic?",
+            "completion_criterion": "Comparison of passenger numbers showing one airport higher than the other",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "Name of the busier airport based on passenger volume",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "semantic_search",
+          "query": "Palm Springs airport number of passengers or flights"
+        }
+      }
+    },
+    {
+      "qid": "5a7306a655429901807daf67",
+      "question": "Who is prime minister of this West African country that covers 36125km2?",
+      "gold_answer": "Umaro Mokhtar Sissoco Embaló",
+      "baseline_answer": "**Umaro Mokhtar Sissoco Embaló (or Umaro Sissoco Embalo).**\n\nThe West African country with an area of 36,125 km² is Guinea-Bissau (officially the Republic of Guinea-Bissau).\n\nAccording to the available documents, Umaro Mokhtar Sissoco Embaló (born 23 September 1972) has been its prime minister since 18 November 2016.",
+      "task_list_answer": "**Umaro Mokhtar Sissoco Embaló (also spelled Umaro Sissoco Embaló)**\n\nGuinea-Bissau is the West African country that covers 36125 km².\n\nThe documents state that Umaro Mokhtar Sissoco Embaló (born 23 September 1972) has been the prime minister of Guinea-Bissau since 18 November 2016.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "baseline_answer_already_correct",
+      "manual_note": "Umaro Mokhtar Sissoco Embaló 仍是精确答案，但 judge 继续误判。",
+      "baseline_loops": 6,
+      "task_list_loops": 6,
+      "baseline_retrieved_tokens": 4219,
+      "task_list_retrieved_tokens": 3871,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which West African country has an area of 36125 km²?",
+            "completion_criterion": "Country X is West African and has area 36125 km²",
+            "status": "completed",
+            "answer": "Guinea-Bissau",
+            "evidence_quote": "guinea - bissau ( ), officially the republic of guinea - bissau ( portuguese : \" republica da guine - bissau \", ] ), is a country in west africa. it covers 36125 km2 with an estimated population of.",
+            "evidence_chunk_ids": [
+              "820"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Who is the prime minister of that country?",
+            "completion_criterion": "Person Y is prime minister of Guinea-Bissau",
+            "status": "completed",
+            "answer": "Umaro Mokhtar Sissoco Embalo",
+            "evidence_quote": "umaro mokhtar sissoco embalo ( born 23 september 1972 ) has been the prime minister of guinea - bissau since 18 november 2016.",
+            "evidence_chunk_ids": [
+              "821"
+            ]
+          }
+        ],
+        "expected_answer_type": "Person name",
+        "candidate_answer": "Umaro Mokhtar Sissoco Embalo",
+        "candidate_evidence_chunk_ids": [
+          "820",
+          "821"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5adbe75455429944faac23af",
+      "question": "What record company does distribution for Joan Marie Larkin and Kenny Laguna?",
+      "gold_answer": "Blackheart Records",
+      "baseline_answer": "**Mercury Records (via Blackheart Records).**\n\nJoan Marie Larkin (professionally known as Joan Jett) and Kenny Laguna founded the American record label Blackheart Records. From 1998 to 2000, Blackheart Records acted as a boutique distribution outlet for independent labels. In that capacity, it arranged a distribution deal with Mercury Records (for example, for the label behind Big Daddy Kane’s album *Veteranz Day*). No other distributor is mentioned in the available documents for their label or work.",
+      "task_list_answer": "**Mercury Records**\n\nJoan Marie Larkin is the birth name of rock musician Joan Jett. She and Kenny Laguna co-founded the independent label Blackheart Records. The only documented distribution relationship involving them is that Blackheart Records acted as a boutique distribution outlet (1998–2000) and facilitated a distribution deal with Mercury Records for another independent label (The Label Records / Big Daddy Kane’s *Veteranz Day*).\n\nNo other distributor for their own music or label is stated in the retrieved documents.",
+      "baseline_primary_failure_type": "11. 最终答案表达或格式问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 14,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 11062,
+      "task_list_retrieved_tokens": 10573,
+      "task_state_updates": 4,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is Joan Marie Larkin?",
+            "completion_criterion": "Document states full name or identity of Joan Marie Larkin",
+            "status": "completed",
+            "answer": "Joan Jett",
+            "evidence_quote": "Joan Marie Larkin (born September 22, 1958), known professionally as Joan Jett, is an american rock singer",
+            "evidence_chunk_ids": [
+              "780"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Who is Kenny Laguna in relation to Joan Marie Larkin?",
+            "completion_criterion": "Document states relationship between Kenny Laguna and Joan Marie Larkin",
+            "status": "completed",
+            "answer": "Co-founder of Blackheart Records with Joan Jett",
+            "evidence_quote": "blackheart records is an american record label founded by rock musicians joan jett and kenny laguna",
+            "evidence_chunk_ids": [
+              "780"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "What record company does distribution for Joan Marie Larkin and Kenny Laguna?",
+            "completion_criterion": "Document states the record company that handles distribution for Joan Marie Larkin and/or Kenny Laguna or their Blackheart Records",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "record company name",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "Mercury Records Joan Jett"
+        }
+      }
+    },
+    {
+      "qid": "5ae30aa05542992decbdcdd7",
+      "question": "The design team for role playing game Black Crusade featured the work of this designer who was the lead developer for what game?",
+      "gold_answer": "Dark Heresy",
+      "baseline_answer": "**Aaron Allston's Strike Force and/or Savage Worlds Rifts (both; Ross Watson)**\n\nRoss Watson (born May 22, 1975), a designer of computer, miniature, and role-playing games, was part of the design team for the 2011 Warhammer 40,000 Roleplay game *Black Crusade*. The same source states that he previously served as the lead developer for both *Aaron Allston's Strike Force* and *Savage Worlds Rifts* (and had earlier roles as lead developer for *Dark Heresy* and lead designer for *Rogue Trader* and *Deathwatch*). No other designers linked to the *Black Crusade* team in the available documents match the “lead developer” description.",
+      "task_list_answer": "**Dark Heresy**\n\nRoss Watson (a designer of computer, miniature, and role-playing games) was part of the design team for the 2011 Warhammer 40,000 Roleplay game *Black Crusade*. He also served as the lead developer for *Dark Heresy* (and lead designer for *Rogue Trader* and *Deathwatch*) in the same line.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "genuine_improvement",
+      "manual_note": "从其他履历候选修正为直接证据中的 Dark Heresy。",
+      "baseline_loops": 9,
+      "task_list_loops": 11,
+      "baseline_retrieved_tokens": 6332,
+      "task_list_retrieved_tokens": 3040,
+      "task_state_updates": 4,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who were the designers on the Black Crusade RPG design team?",
+            "completion_criterion": "Document lists designers or design team members for Black Crusade RPG",
+            "status": "completed",
+            "answer": "Ross Watson was part of the design team for Black Crusade",
+            "evidence_quote": "was part of the design team for black crusade",
+            "evidence_chunk_ids": [
+              "863"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which designer from Black Crusade was lead developer for another game, and what game?",
+            "completion_criterion": "Document states that a named Black Crusade designer was lead developer for a specific game",
+            "status": "completed",
+            "answer": "Ross Watson was lead developer for Dark Heresy",
+            "evidence_quote": "watson worked on the warhammer 40, 000 roleplay line as the lead developer for dark heresy, was the lead designer for rogue trader and deathwatch, and was part of the design team for black crusade",
+            "evidence_chunk_ids": [
+              "863"
+            ]
+          }
+        ],
+        "expected_answer_type": "string (game title)",
+        "candidate_answer": "Dark Heresy",
+        "candidate_evidence_chunk_ids": [
+          "863"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae7e8b855429952e35ea9dd",
+      "question": "What single was released by a American country singer, songwriter and multi-instrumentalist on MCA Nashville in 2000?",
+      "gold_answer": "Feels Like Love",
+      "baseline_answer": "**\"Let's Make Sure We Kiss Goodbye\" (also the title track of the album of the same name; other singles from it include \"Feels Like Love\" and \"Shoot Straight from Your Heart\").**\n\nThis matches the description of Vince Gill (Vincent Grant Gill, born April 12, 1957), an American country singer, songwriter, and multi-instrumentalist known for his solo work (after fronting Pure Prairie League) and as a sought-after vocalist/duet partner. His ninth studio album, *Let's Make Sure We Kiss Goodbye*, was released in 2000 on MCA Nashville and produced those singles.\n\nNo other figure in the documents fits the full description (American country singer/songwriter/multi-instrumentalist) with a 2000 MCA Nashville single release as closely.",
+      "task_list_answer": "**Let's Make Sure We Kiss Goodbye (by Vince Gill)**\n\nVince Gill (Vincent Grant Gill, born April 12, 1957) is described as an American country singer, songwriter, and multi-instrumentalist who found success as frontman of Pure Prairie League and as a solo artist.\n\nHis ninth studio album, *Let's Make Sure We Kiss Goodbye*, was released in 2000 on MCA Nashville and features the singles \"Let's Make Sure We Kiss Goodbye,\" \"Feels Like Love,\" and \"Shoot Straight From Your Heart.\" The title track is the primary single associated with this 2000 MCA Nashville release.\n\nNo other document evidence matches an individual American country singer-songwriter multi-instrumentalist releasing a single on MCA Nashville specifically in 2000.",
+      "baseline_primary_failure_type": "11. 最终答案表达或格式问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 13,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 11089,
+      "task_list_retrieved_tokens": 6187,
+      "task_state_updates": 6,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is the American country singer, songwriter and multi-instrumentalist that released a single on MCA Nashville in 2000?",
+            "completion_criterion": "Named person is American country singer/songwriter/multi-instrumentalist who released single on MCA Nashville in 2000",
+            "status": "completed",
+            "answer": "Vince Gill",
+            "evidence_quote": "vincent grant gill ( born april 12, 1957 ) is an american country singer, songwriter and multi - instrumentalist",
+            "evidence_chunk_ids": [
+              "855",
+              "856"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What single did that artist release on MCA Nashville in 2000?",
+            "completion_criterion": "Named single was released by the artist on MCA Nashville in 2000",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "single name or title",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "keywords": [
+            "Let's Make Sure We Kiss Goodbye",
+            "Vince Gill"
+          ]
+        }
+      }
+    },
+    {
+      "qid": "5aded04755429975fa854fa7",
+      "question": "What team won the XLII super bowl in their 48th overall season?",
+      "gold_answer": "2007 New England Patriots",
+      "baseline_answer": "**New York Giants**\n\nSuper Bowl XLII (for the 2007 NFL season) was played on February 3, 2008, between the NFC champion New York Giants and the AFC champion New England Patriots. The Giants won 17–14.\n\nSupporting details from the documents:\n- The Giants finished the 2007 regular season 10–6 (their 83rd season in the NFL), entered the playoffs as a #5 wild-card seed, and won three road playoff games before defeating the previously undefeated (18–0) Patriots in the Super Bowl. This was their first Super Bowl win since Super Bowl XXV (1991) and their 7th league championship overall.\n- The 2007 New England Patriots season (the other Super Bowl XLII participant) is described as the franchise’s 48th overall season (and 38th in the NFL), but they lost the game.\n\nNo other team is identified in the documents as winning Super Bowl XLII, and no Super Bowl winner is described as doing so in their 48th overall season (the 48th-season references apply to the 2007 Patriots, 2007 Jets, and 2017 Raiders, none of whom won that Super Bowl).",
+      "task_list_answer": "**New York Giants**\n\nAccording to the documents, Super Bowl XLII (for the 2007 NFL season) was won by the New York Giants, who defeated the New England Patriots 17–14.\n\nThe 2007 New York Giants season was the franchise’s 83rd season in the NFL (not their 48th).\n\nThe 2007 New England Patriots season was the franchise’s 48th overall, but they lost the Super Bowl.\n\nNo document states that any team won Super Bowl XLII while in its 48th overall season. The team that won is the New York Giants.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 7,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 6835,
+      "task_list_retrieved_tokens": 12035,
+      "task_state_updates": 6,
+      "task_state_complete": true,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which team won Super Bowl XLII?",
+            "completion_criterion": "Document states the winner of Super Bowl XLII is Team X",
+            "status": "completed",
+            "answer": "New York Giants",
+            "evidence_quote": "the giants defeated the patriots by the score of 17 – 14",
+            "evidence_chunk_ids": [
+              "794"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Was the Super Bowl XLII winner in their 48th overall season?",
+            "completion_criterion": "Document states that the winning team of Super Bowl XLII was in their 48th overall season",
+            "status": "completed",
+            "answer": "No, they were in their 83rd",
+            "evidence_quote": "the 2007 new york giants season was the 83rd season for the new york giants in the national football league",
+            "evidence_chunk_ids": [
+              "793"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which team was in their 48th overall season during the Super Bowl XLII year?",
+            "completion_criterion": "Document states Team Y was in their 48th overall season in 2007",
+            "status": "completed",
+            "answer": "New England Patriots",
+            "evidence_quote": "the 2007 new england patriots season was the 38th season for the team in the national football league and franchise's 48th season overall",
+            "evidence_chunk_ids": [
+              "794"
+            ]
+          },
+          {
+            "id": "4",
+            "question": "Did that team win Super Bowl XLII?",
+            "completion_criterion": "Document states whether the 48th season team won Super Bowl XLII",
+            "status": "completed",
+            "answer": "No, they lost",
+            "evidence_quote": "the giants defeated the patriots by the score of 17 – 14",
+            "evidence_chunk_ids": [
+              "794"
+            ]
+          }
+        ],
+        "expected_answer_type": "Team name",
+        "candidate_answer": "New York Giants",
+        "candidate_evidence_chunk_ids": [
+          "794",
+          "793"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a8f45385542997ba9cb320a",
+      "question": "Dahlia and Aruncus are both examples of what type of plant catagorization?",
+      "gold_answer": "genus",
+      "baseline_answer": "**Herbaceous perennial plants (or herbaceous perennials).**\n\nThis is directly supported by the source documents:\n\n- Dahlia is described as “a genus of bushy, tuberous, **herbaceous perennial plants** native to Mexico.”\n- Aruncus is described as “a genus of clump forming **herbaceous perennial plants** in the family Rosaceae,” and its type species *Aruncus dioicus* is called “a flowering **herbaceous perennial plant**.”\n\nBoth therefore fall into the same plant life-cycle/growth-form category of herbaceous perennials (non-woody plants that live for more than two years and typically die back to the ground in winter).",
+      "task_list_answer": "**Herbaceous perennial plants (or herbaceous perennials).**\n\nIn the source documents:\n- Dahlia is described as “a genus of bushy, tuberous, herbaceous perennial plants native to Mexico.”\n- Aruncus is described as “a genus of clump forming herbaceous perennial plants in the family Rosaceae,” and its type species *Aruncus dioicus* is called “a flowering herbaceous perennial plant.”\n\nThese are the shared plant categorizations given for both genera. No other common higher-level category (e.g., family, tuber type, or growth habit beyond herbaceous perennial) groups them together as explicit examples in the retrieved material.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 5,
+      "task_list_loops": 9,
+      "baseline_retrieved_tokens": 4557,
+      "task_list_retrieved_tokens": 7046,
+      "task_state_updates": 6,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What plant categorization includes both Dahlia and Aruncus?",
+            "completion_criterion": "Document states that Dahlia and Aruncus are both examples of a specific plant type or category.",
+            "status": "completed",
+            "answer": "herbaceous perennial plants",
+            "evidence_quote": "dahlia ( or ) is a genus of bushy, tuberous, herbaceous perennial plants native to mexico ... aruncus is a genus of clump forming herbaceous perennial plants in the family rosaceae ... aruncus dioicus ... is a flowering herbaceous perennial plant in the family rosaceae",
+            "evidence_chunk_ids": [
+              "904",
+              "905"
+            ]
+          }
+        ],
+        "expected_answer_type": "string (plant category name)",
+        "candidate_answer": "herbaceous perennial plants",
+        "candidate_evidence_chunk_ids": [
+          "904",
+          "905"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5adefdd75542995ec70e8f4e",
+      "question": "How many times has the team Jack McKeon managed won the World Series?",
+      "gold_answer": "two World Series championships",
+      "baseline_answer": "**1 time (with the Florida Marlins in 2003).**\n\nJack McKeon is explicitly identified as a World Series-winning manager in the documents (alongside Earl Weaver). He managed the Florida Marlins in 2003–2005 (hired mid-season in 2003, when he also won Manager of the Year as only the second such mid-season hire to earn the award). The Marlins have won exactly two World Series titles as a wild-card team (1997 under Jim Leyland, and the other under McKeon). No other teams he managed (such as the 1997 Cincinnati Reds, where he shared duties with Ray Knight) won a World Series during his tenure.\n\nThis is confirmed across the relevant document chunks mentioning McKeon, the Marlins’ championships, and his managerial record.",
+      "task_list_answer": "**1**\n\nJack McKeon is identified in the documents as a World Series-winning manager (alongside Earl Weaver) who managed at Appleton. He managed the Florida Marlins (including their 2004 and 2005 seasons, after a 2003 season referenced in connection with him) and the Cincinnati Reds (1997, shared with Ray Knight).\n\nThe Florida Marlins (later Miami Marlins) have won two World Series as a wild-card team (one in 1997 under Jim Leyland). No document states that any other team McKeon managed won a World Series under him, and the phrasing “world series-winning managers … jack mckeon” confirms he has that distinction without indicating multiples. Thus, the team(s) he managed won the World Series once under his management.",
+      "baseline_primary_failure_type": "8. 已经读取正确证据，但推理错误",
+      "baseline_aggregate_bucket": "evidence_sufficient_reasoning",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "system_error_persists",
+      "manual_note": "Task list 执行后仍未得到当前 Gold 所需答案。",
+      "baseline_loops": 13,
+      "task_list_loops": 13,
+      "baseline_retrieved_tokens": 14664,
+      "task_list_retrieved_tokens": 13480,
+      "task_state_updates": 8,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which teams did Jack McKeon manage?",
+            "completion_criterion": "Jack McKeon managed Florida Marlins and Cincinnati Reds",
+            "status": "completed",
+            "answer": "Florida Marlins and Cincinnati Reds",
+            "evidence_quote": "their manager was jack mckeon. ... the reds were managed by ray knight and jack mckeon ... world series - winning managers earl weaver and jack mckeon",
+            "evidence_chunk_ids": [
+              "815",
+              "814"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "How many World Series did the teams managed by Jack McKeon win under his management?",
+            "completion_criterion": "The team(s) Jack McKeon managed won the World Series N times",
+            "status": "completed",
+            "answer": "1",
+            "evidence_quote": "world series - winning managers earl weaver and jack mckeon were managers at appleton",
+            "evidence_chunk_ids": [
+              "814"
+            ]
+          }
+        ],
+        "expected_answer_type": "integer count",
+        "candidate_answer": "1",
+        "candidate_evidence_chunk_ids": [
+          "814",
+          "815"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a711cb45542994082a3e59f",
+      "question": "Who has won more Grand Slam women's doubles titles, Lisa Raymond or Liezel Huber?",
+      "gold_answer": "Liezel Huber",
+      "baseline_answer": "**Lisa Raymond has won more Grand Slam women's doubles titles (6) than Liezel Huber (5).**\n\nThis is based on the biographical details in the documents:\n- Lisa Raymond has 11 Grand Slam titles total: 6 in women's doubles and 5 in mixed doubles.\n- Liezel Huber has won four Grand Slam women's doubles titles with partner Cara Black and one with Lisa Raymond (for a total of 5 in women's doubles), plus two mixed doubles titles with Bob Bryan.\n\nThese figures are consistent across the relevant document chunks describing their careers. No other sources in the corpus indicate different totals for women's doubles majors.",
+      "task_list_answer": "**Lisa Raymond** has won more Grand Slam women's doubles titles.\n\nAccording to the documents:\n- Lisa Raymond has **6** Grand Slam titles in women's doubles (plus 5 in mixed doubles, for 11 total Grand Slam titles).\n- Liezel Huber has **5** Grand Slam titles in women's doubles (four with Cara Black and one with Lisa Raymond; she also has two mixed doubles titles).\n\nThus Raymond leads 6–5.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 5,
+      "task_list_loops": 5,
+      "baseline_retrieved_tokens": 7926,
+      "task_list_retrieved_tokens": 4551,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "How many Grand Slam women's doubles titles has Lisa Raymond won?",
+            "completion_criterion": "Lisa Raymond has won N Grand Slam women's doubles titles",
+            "status": "completed",
+            "answer": "6",
+            "evidence_quote": "raymond has 11 grand slam titles to her name : 6 in women's doubles and 5 in mixed doubles.",
+            "evidence_chunk_ids": [
+              "943",
+              "944"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "How many Grand Slam women's doubles titles has Liezel Huber won?",
+            "completion_criterion": "Liezel Huber has won N Grand Slam women's doubles titles",
+            "status": "completed",
+            "answer": "5",
+            "evidence_quote": "huber has won four grand slam titles in women's doubles with partner cara black, one with lisa raymond, and two mixed doubles titles with bob bryan.",
+            "evidence_chunk_ids": [
+              "943"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Who has more Grand Slam women's doubles titles between Lisa Raymond and Liezel Huber?",
+            "completion_criterion": "Player X has more Grand Slam women's doubles titles than Player Y",
+            "status": "completed",
+            "answer": "Lisa Raymond has more (6 vs 5)",
+            "evidence_quote": "raymond has 11 grand slam titles to her name : 6 in women's doubles... huber has won four grand slam titles in women's doubles with partner cara black, one with lisa raymond",
+            "evidence_chunk_ids": [
+              "943",
+              "944"
+            ]
+          }
+        ],
+        "expected_answer_type": "Name of the player with more titles (or tie)",
+        "candidate_answer": "Lisa Raymond",
+        "candidate_evidence_chunk_ids": [
+          "943",
+          "944"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a8de02b554299068b959e13",
+      "question": "What team did Robbie Keane play for after Inter Milan?",
+      "gold_answer": "Republic of Ireland national team",
+      "baseline_answer": "**Tottenham Hotspur (or more precisely, the documents do not specify the immediate next team).**\n\nThe available documents in the corpus only briefly reference Robbie Keane (Robert David Keane, born 8 July 1980) in chunk 914. They note that he is an Irish professional footballer who plays as a forward for Indian club ATK, and they mention him in the context of Inter Milan (as one of the players given the scoring burden alongside Hakan Şükür while waiting for other strikers’ recoveries).\n\nNo further details on his club career timeline, transfers, or the specific team he joined immediately after Inter Milan appear in any retrieved chunks. The documents do not support identifying a particular next club beyond the limited mentions of Inter Milan and (much later) ATK.",
+      "task_list_answer": "**ATK (Indian Super League club)**\n\nFrom the available documents (Chunk 914), Robbie Keane is described as an Irish professional footballer who played for Inter Milan (mentioned in the context of the team’s scoring responsibilities alongside Hakan Şükür) and who “plays as a forward for indian club atk.” This is the only subsequent club named for him in the corpus after his time at Inter Milan. No other intermediate teams (such as Leeds United or Tottenham Hotspur) appear in the retrieved documents.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 6,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 7661,
+      "task_list_retrieved_tokens": 9689,
+      "task_state_updates": 7,
+      "task_state_complete": true,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What team did Robbie Keane play for after Inter Milan?",
+            "completion_criterion": "Robbie Keane transferred to or played for [team] after Inter Milan",
+            "status": "completed",
+            "answer": "ATK",
+            "evidence_quote": "robert david \" robbie \" keane ( born 8 july 1980 ) is an irish professional footballer who plays as a forward for indian club atk.",
+            "evidence_chunk_ids": [
+              "914"
+            ]
+          }
+        ],
+        "expected_answer_type": "team name",
+        "candidate_answer": "ATK",
+        "candidate_evidence_chunk_ids": [
+          "914"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae1a8c05542997f29b3c0ec",
+      "question": "Where is the location of Liberty Square park in Disneyland California?",
+      "gold_answer": "Anaheim",
+      "baseline_answer": "**There is no Liberty Square (or Liberty Square park) in Disneyland California (Anaheim).**\n\nAccording to the documents, Liberty Square is one of six themed lands exclusive to the Magic Kingdom theme park at the Walt Disney World Resort in Lake Buena Vista, Florida. It is themed after colonial America and includes attractions such as the Haunted Mansion, the Hall of Presidents, and the Liberty Belle riverboat on the Rivers of America.\n\nNo documents mention a Liberty Square park, land, or area at Disneyland Park in Anaheim, California. (Disneyland’s colonial-era-inspired area is New Orleans Square, but it is distinct and not referred to as Liberty Square.) Other “Liberty Square” references in the corpus refer to unrelated plazas or parks elsewhere (e.g., Taipei, Tolyatti, etc.).",
+      "task_list_answer": "**There is no Liberty Square park (or themed land) in Disneyland California (Disneyland Park in Anaheim).**\n\nLiberty Square is one of six themed lands and is exclusive to the Magic Kingdom theme park at the Walt Disney World Resort in Lake Buena Vista, Florida. It is themed after colonial America and includes attractions such as the Haunted Mansion, the Hall of Presidents, replicas of the Liberty Bell and Liberty Tree, and a waterfront on the Rivers of America where the Liberty Belle riverboat departs.\n\n(The documents contain no references to any Liberty Square in Disneyland Park Anaheim or elsewhere in California Disneyland properties; Disneyland’s corresponding colonial/early-American-adjacent areas use different theming such as New Orleans Square or Frontierland.)",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 4,
+      "task_list_loops": 10,
+      "baseline_retrieved_tokens": 4771,
+      "task_list_retrieved_tokens": 6887,
+      "task_state_updates": 7,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Does Liberty Square park exist in Disneyland California?",
+            "completion_criterion": "Document asserts that Liberty Square park is or is not located in Disneyland California",
+            "status": "completed",
+            "answer": "No, Liberty Square is exclusive to Magic Kingdom at Walt Disney World in Florida and is not in Disneyland California",
+            "evidence_quote": "liberty square is one of six \" themed lands \" and is exclusive to the magic kingdom, a theme park at the walt disney world resort in lake buena vista, florida.",
+            "evidence_chunk_ids": [
+              "329"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the specific location of Liberty Square park within Disneyland California?",
+            "completion_criterion": "Document states the area, land, or position of Liberty Square park in Disneyland California",
+            "status": "completed",
+            "answer": "It does not exist in Disneyland California",
+            "evidence_quote": "liberty square is one of six \" themed lands \" and is exclusive to the magic kingdom, a theme park at the walt disney world resort in lake buena vista, florida.",
+            "evidence_chunk_ids": [
+              "329"
+            ]
+          }
+        ],
+        "expected_answer_type": "confirmation of non-existence with actual location",
+        "candidate_answer": "There is no Liberty Square park in Disneyland California; Liberty Square is a themed land exclusive to the Magic Kingdom at Walt Disney World Resort in Lake Buena Vista, Florida.",
+        "candidate_evidence_chunk_ids": [
+          "329"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ae234005542994d89d5b392",
+      "question": "Who has the highest scope in profession in  Rob Thomas or  James Dean Bradfield",
+      "gold_answer": "James Dean Bradfield",
+      "baseline_answer": "**Rob Thomas has the higher/greater professional scope compared to James Dean Bradfield, based on the details in the documents.**\n\n### Key details from the documents:\n\n**Rob Thomas (Robert Kelly Thomas, born February 14, 1972):**  \n- American singer, songwriter, record producer, and multi-instrumentalist.  \n- Best known as the lead singer of the alternative band Matchbox 20.  \n- Also records and performs as a solo artist; his biggest solo chart success was “Lonely No More” (2005).  \n- Earned three Grammy Awards for co-writing and singing on the three-time Grammy-winning 1999 smash hit “Smooth” by Santana (from the fifteen-times-platinum album *Supernatural*).  \n\nThis shows a broad professional reach: frontman of a major alternative band + successful solo career + major songwriting/collaboration credits with massive commercial and award success + producer/multi-instrumentalist roles.\n\n**James Dean Bradfield (born 21 February 1969):**  \n- Welsh singer-songwriter, musician, and record producer.  \n- Best known as the lead guitarist and lead vocalist for the Welsh alternative rock band Manic Street Preachers.  \n- Has a solo career (e.g., the album *The Great Western* and single “An English Gentleman,” 2006).  \n- Frequently shares songwriting credits with bandmates Sean Moore and Nicky Wire on Manic Street Preachers tracks; he wrote both lyrics and music for some songs (e.g., “Ocean Spray”).  \n- Co-wrote and produced tracks for others (e.g., Kylie Minogue’s “Some Kind of Bliss”).  \n\nHis scope is strong as a core member of a successful alternative rock band with songwriting, production, and solo work, but the documents highlight fewer high-profile external collaborations, chart peaks (mostly UK Top 10–15 singles with the band), or major awards compared to Thomas.\n\n### Comparison of professional scope\nBoth are lead vocalists/songwriters/producers in alternative rock with solo careers. However, Thomas’s documented achievements include multi-instrumentalism, major Grammy wins, a massive multi-platinum collaboration outside his band, and broader commercial success indicators. Bradfield’s are more tightly focused on his band’s UK-centric output and internal songwriting/production. The documents support Rob Thomas as having the highest (broader/more impactful) professional scope.  \n\nAll information is drawn directly from the available document chunks (primarily chunk 934); no additional comparisons or metrics (e.g., total sales or later career details) appear in the corpus.",
+      "task_list_answer": "**Rob Thomas (Robert Kelly Thomas).**\n\nBoth are singer-songwriters, musicians, and record producers known as lead vocalists/guitarists of alternative rock bands, but the documents show Rob Thomas has the broader professional scope and higher-profile achievements.\n\n- **Rob Thomas**: American singer, songwriter, record producer, and multi-instrumentalist; lead singer of Matchbox 20; successful solo artist (biggest solo hit “Lonely No More” in 2005); earned three Grammy Awards for co-writing and singing on Santana’s “Smooth” (from the 15-times-platinum album *Supernatural*).\n\n- **James Dean Bradfield**: Welsh singer-songwriter, musician, and record producer; lead guitarist and lead vocalist of Manic Street Preachers; solo artist (*The Great Western*, including single “An English Gentleman”); co-wrote with Kylie Minogue; band singles reached UK chart positions such as No. 8–15.\n\nThe explicit mention of multiple Grammy wins and a multi-platinum collaboration for Thomas indicates wider commercial and industry reach compared with the UK chart success and band/solo work described for Bradfield. No other documents in the corpus provide additional comparative metrics.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 9,
+      "task_list_loops": 11,
+      "baseline_retrieved_tokens": 8604,
+      "task_list_retrieved_tokens": 7794,
+      "task_state_updates": 7,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is Rob Thomas's profession and career scope/achievements?",
+            "completion_criterion": "Documents state Rob Thomas's profession and key career metrics or scope.",
+            "status": "completed",
+            "answer": "American singer, songwriter, record producer and multi-instrumentalist; lead singer of Matchbox 20; solo artist; three Grammy awards for \"Smooth\" on 15x platinum album Supernatural.",
+            "evidence_quote": "robert kelly thomas ( born february 14, 1972 ) is an american singer, songwriter, record producer and multi - instrumentalist, best known as the lead singer of alternative band matchbox 20. thomas also records and performs as a solo artist with \" lonely no more \" released in 2005 becoming his biggest solo chart success. thomas earned three grammy awards for co - writing and singing on the three - time grammy award winning 1999 summer smash hit, \" smooth \" by santana, off the fifteen - time platinum album \" supernatural \".",
+            "evidence_chunk_ids": [
+              "934"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is James Dean Bradfield's profession and career scope/achievements?",
+            "completion_criterion": "Documents state James Dean Bradfield's profession and key career metrics or scope.",
+            "status": "completed",
+            "answer": "Welsh singer-songwriter, musician and record producer; lead guitarist and lead vocalist for Manic Street Preachers; solo artist with album The Great Western; co-wrote with Kylie Minogue; band singles charted UK top 10/15.",
+            "evidence_quote": "james dean bradfield ( born 21 february 1969 ) is a welsh singer - songwriter, musician and record producer. he is known for being the lead guitarist and lead vocalist for the welsh alternative rock band manic street preachers.",
+            "evidence_chunk_ids": [
+              "934"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Who between Rob Thomas and James Dean Bradfield has the highest scope in profession?",
+            "completion_criterion": "Documents or comparison of facts establish which person has higher professional scope.",
+            "status": "completed",
+            "answer": "Rob Thomas",
+            "evidence_quote": "thomas earned three grammy awards for co - writing and singing on the three - time grammy award winning 1999 summer smash hit, \" smooth \" by santana, off the fifteen - time platinum album \" supernatural \".",
+            "evidence_chunk_ids": [
+              "934"
+            ]
+          }
+        ],
+        "expected_answer_type": "Person name (Rob Thomas or James Dean Bradfield)",
+        "candidate_answer": "Rob Thomas",
+        "candidate_evidence_chunk_ids": [
+          "934"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a7a103b5542990783324e27",
+      "question": "What album succeeded Kendrick Lamar's album that had the song Money Trees in it?",
+      "gold_answer": "Section.80",
+      "baseline_answer": "**To Pimp a Butterfly (2015).**\n\n“Money Trees” (featuring Jay Rock) is a track from Kendrick Lamar’s major-label debut studio album *good kid, m.A.A.d city* (stylized as *good kid, m.A.A.d city*), released October 22, 2012. This was his second studio album overall (following the independent *Section.80* in 2011).\n\n*To Pimp a Butterfly* is identified in the documents as his third album (released 2015), with tracks such as “These Walls” drawn from it. No intervening studio album is referenced between *good kid, m.A.A.d city* and *To Pimp a Butterfly*. (Note: one document later refers to *Damn*. as a “3rd studio album,” likely reflecting major-label counting that treats *good kid* as the first major release, but the chronology and explicit labeling of *To Pimp a Butterfly* as the third album place it immediately after *good kid, m.A.A.d city*.)\n\nThis is supported by the album and track descriptions across the retrieved chunks.",
+      "task_list_answer": "**To Pimp a Butterfly**\n\nThe song “Money Trees” appears on Kendrick Lamar’s major-label debut studio album *good kid, m.A.A.d city* (2012), which is identified as his second studio album (following the independent debut *Section.80*).\n\n*To Pimp a Butterfly* is referenced in the documents as a subsequent Kendrick Lamar album (containing the track “These Walls,” which won a Grammy). *Damn* is separately described as his third studio album, but the documents do not contain an explicit chronological succession statement linking either album directly as the immediate next release after *good kid, m.A.A.d city*. The available evidence most consistently places *To Pimp a Butterfly* as the album that succeeded it.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 7,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 8852,
+      "task_list_retrieved_tokens": 10074,
+      "task_state_updates": 3,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which Kendrick Lamar album contains the song Money Trees?",
+            "completion_criterion": "Album X by Kendrick Lamar contains the song Money Trees",
+            "status": "completed",
+            "answer": "good kid, m.A.A.d city",
+            "evidence_quote": "\" money trees \" is a song by american hip hop recording artist kendrick lamar, taken from his major label debut studio album \" good kid, m. a. a. d city \" ( 2012 ).",
+            "evidence_chunk_ids": [
+              "1054"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What album succeeded that album by Kendrick Lamar?",
+            "completion_criterion": "Album Y succeeded album X by Kendrick Lamar",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "Album name",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "To Pimp a Butterfly"
+        }
+      }
+    },
+    {
+      "qid": "5a8baf635542996e8ac889c6",
+      "question": "What is the current capital of the district that Michael \"Mike\" Campbell is from?",
+      "gold_answer": "Harare",
+      "baseline_answer": "**Chegutu (also known as Chegutu town or the administrative center of Chegutu District).**\n\nMichael \"Mike\" Campbell (12 October 1932 – 8 April 2011) was a white African farmer from the district of Chegutu in Zimbabwe (formerly Rhodesia). This is directly stated in the retrieved document chunk discussing his life and legal case against the Mugabe regime.\n\nNo other districts are associated with him in the corpus. The documents do not contain an explicit separate statement naming a different capital for Chegutu District (searches for related terms like \"Chegutu capital,\" \"district of Chegutu,\" or Zimbabwe district capitals returned no additional relevant details). Consistent with the naming and administrative patterns described for similar districts elsewhere in the corpus (e.g., a district capital often sharing the district's name as its primary town/camptown/headquarters), Chegutu is the current capital of Chegutu District.",
+      "task_list_answer": "**Chegutu**\n\nMichael \"Mike\" Campbell (12 October 1932 – 8 April 2011) was a white African farmer from the district of Chegutu in Zimbabwe (formerly Rhodesia).\n\nThe available documents identify only this district of origin and contain no other explicit statement of its capital (or headquarters/seat). In standard administrative naming for Zimbabwean districts, the district takes its name from its principal town, which serves as the capital/administrative centre. Thus the current capital of Chegutu District is Chegutu.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 15,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 9344,
+      "task_list_retrieved_tokens": 13020,
+      "task_state_updates": 4,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is Michael \"Mike\" Campbell and what district is he from?",
+            "completion_criterion": "Michael \"Mike\" Campbell is from [district name]",
+            "status": "completed",
+            "answer": "district of Chegutu in Zimbabwe",
+            "evidence_quote": "michael \" mike \" campbell ( 12 october 1932 – 8 april 2011 ) was a white african farmer from the district of chegutu in zimbabwe ( formerly rhodesia ).",
+            "evidence_chunk_ids": [
+              "916"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the current capital of that district?",
+            "completion_criterion": "The current capital of Chegutu district is [capital]",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "City or place name",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "read_chunk",
+          "chunk_ids": [
+            "915",
+            "917"
+          ]
+        }
+      }
+    },
+    {
+      "qid": "5ac272f95542992f1f2b38d3",
+      "question": "Are Couroupita and Graptopetalum plants both native to central America?",
+      "gold_answer": "yes",
+      "baseline_answer": "**No.**\n\nGraptopetalum (also called leatherpetal) is a genus of perennial succulent plants in the family Crassulaceae, native to Mexico and Arizona.\n\nCouroupita is a genus of flowering plants in the Lecythidaceae family (which includes the cannonball tree, *Couroupita guianensis*), native to tropical South America and Central America. *C. guianensis* specifically is native to the rainforests of Central and South America.\n\nWhile Couroupita is native (in part) to Central America, Graptopetalum is not—it is native to Mexico and Arizona (parts of North America). Therefore, they are not both native to Central America.",
+      "task_list_answer": "**No.**\n\nCouroupita (specifically the genus and species such as *Couroupita guianensis*) is native to the rainforests of tropical South America and Central America.\n\nGraptopetalum (leatherpetal) is a genus of perennial succulent plants native to Mexico and Arizona.\n\nThe documents define Central America as the seven countries of Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, and Panama (distinct from Mexico). Thus Graptopetalum’s range (Mexico and Arizona) falls outside Central America, so the two genera are not both native there.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 4,
+      "task_list_loops": 7,
+      "baseline_retrieved_tokens": 2868,
+      "task_list_retrieved_tokens": 4157,
+      "task_state_updates": 4,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the native range of Couroupita plants?",
+            "completion_criterion": "Couroupita is native to [region]",
+            "status": "completed",
+            "answer": "tropical South America and Central America",
+            "evidence_quote": "it is native to tropical south america and central america.",
+            "evidence_chunk_ids": [
+              "1202"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the native range of Graptopetalum plants?",
+            "completion_criterion": "Graptopetalum is native to [region]",
+            "status": "completed",
+            "answer": "Mexico and Arizona",
+            "evidence_quote": "they are perennial succulent plants and native to mexico and arizona.",
+            "evidence_chunk_ids": [
+              "1201"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Are both Couroupita and Graptopetalum native to Central America?",
+            "completion_criterion": "Both native to Central America: yes/no based on evidence",
+            "status": "completed",
+            "answer": "No",
+            "evidence_quote": "Central America consists of seven countries : belize, costa rica, el salvador, guatemala, honduras, nicaragua, and panama. ... graptopetalum ... native to mexico and arizona.",
+            "evidence_chunk_ids": [
+              "1201",
+              "1202"
+            ]
+          }
+        ],
+        "expected_answer_type": "yes/no",
+        "candidate_answer": "No",
+        "candidate_evidence_chunk_ids": [
+          "1201",
+          "1202"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5abd8ee05542993062266cc8",
+      "question": "What village in Nassau County, New York with a name meaning \"a pleasant place\" is represented by Kathleen Rice in the United States House of Representatives?",
+      "gold_answer": "Mineola",
+      "baseline_answer": "**Mineola**\n\nMineola is a village in Nassau County, Long Island, New York. Its name comes from an Algonquin word meaning \"a pleasant place.\" It lies within New York's 4th congressional district (covering central and southern Nassau County communities including Mineola, Garden City, Hempstead, Freeport, and others), which Democrat Kathleen Rice has represented in the U.S. House of Representatives since 2015.",
+      "task_list_answer": "**Mineola**\n\nMineola is a village in Nassau County, Long Island, New York. Its name comes from an Algonquin word meaning “a pleasant place.” It is one of the communities in New York’s 4th congressional district (covering central and southern Nassau County), which Democrat Kathleen Rice has represented in the U.S. House of Representatives since 2015. The district also includes places such as Floral Park, Garden City, Hempstead, Freeport, and others.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "baseline_answer_already_correct",
+      "manual_note": "Mineola 仍是精确答案，但 judge 继续误判。",
+      "baseline_loops": 3,
+      "task_list_loops": 7,
+      "baseline_retrieved_tokens": 2282,
+      "task_list_retrieved_tokens": 3427,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Which New York district does Kathleen Rice represent in the US House?",
+            "completion_criterion": "Kathleen Rice represents NY-X or specific district covering Nassau County villages",
+            "status": "completed",
+            "answer": "New York's 4th congressional district",
+            "evidence_quote": "Democrat kathleen rice has represented the district since 2015.",
+            "evidence_chunk_ids": [
+              "1244"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which villages in Nassau County are in Kathleen Rice's district?",
+            "completion_criterion": "List of villages or specific village in Nassau represented by Rice",
+            "status": "completed",
+            "answer": "Includes Mineola among others like Floral Park, Garden City, etc.",
+            "evidence_quote": "it includes the communities of baldwin, bellmore, east rockaway, east meadow, the five towns, lynbrook, floral park, franklin square, garden city, hempstead, long beach, malverne, freeport, merrick, mineola, carle place, new hyde park, oceanside, rockville centre, roosevelt, uniondale, wantagh, west hempstead, westbury and parts of valley stream.",
+            "evidence_chunk_ids": [
+              "1244"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which village in Nassau County has a name meaning 'a pleasant place'?",
+            "completion_criterion": "Village name means 'a pleasant place'",
+            "status": "completed",
+            "answer": "Mineola",
+            "evidence_quote": "the name is derived from an algonquin word meaning a \" pleasant place \".",
+            "evidence_chunk_ids": [
+              "1244"
+            ]
+          },
+          {
+            "id": "4",
+            "question": "Which of those villages is represented by Kathleen Rice?",
+            "completion_criterion": "Village X is represented by Kathleen Rice and name means pleasant place",
+            "status": "completed",
+            "answer": "Mineola",
+            "evidence_quote": "mineola is a village in nassau county... the name is derived from an algonquin word meaning a \" pleasant place \". ... the 4th congressional district ... democrat kathleen rice has represented the district since 2015. ... it includes ... mineola ...",
+            "evidence_chunk_ids": [
+              "1244"
+            ]
+          }
+        ],
+        "expected_answer_type": "string (village name)",
+        "candidate_answer": "Mineola",
+        "candidate_evidence_chunk_ids": [
+          "1244"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "none",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ab9be4f554299753720f843",
+      "question": "What land elevation does Khunyang Chhish and Ismoil Somoni Peak have in common?",
+      "gold_answer": "mountain",
+      "baseline_answer": "**Both are over 7,000 m (Ismoil Somoni Peak at 7,495 m; Khunyang Chhish ~7,823 m / ranked 21st worldwide).**\n\nFrom the documents:\n- Ismoil Somoni Peak (highest in Tajikistan / the Pamirs) has an elevation of 7,495 m. It exceeds Lenin Peak and is described in the context of 7,000 m+ peaks.\n- Khunyang Chhish (or Kunyang Chhish; second-highest in the Hispar Muztagh subrange of the Karakoram) has a height that is also sometimes given as 7,823 m; it is ranked 21st in the world and 8th in Pakistan (consistent with a high 7,000 m+ peak). Its east summit is noted at 7,400 m.\n\nThey share membership in the class of peaks exceeding 7,000 m land elevation (a “7,000er”), as referenced in the surrounding discussion of high Central Asian / Karakoram summits. No identical single elevation figure is stated for both.",
+      "task_list_answer": "**Both are seven-thousanders (elevations above 7,000 m / ~23,000 ft).**\n\nKhunyang Chhish (also Kunyang Chhish) has a height sometimes given as 7823 m and is ranked 21st in the world / 8th in Pakistan.\n\nIsmoil Somoni Peak has an elevation of 7,495 m and is the highest mountain in Tajikistan (exceeding nearby peaks such as Lenin Peak).\n\nNeither document states an identical exact summit height for both, but both are described in contexts of 7000 m (or higher) peaks, placing them in the same elevation class of seven-thousanders. No other shared precise land-elevation value (e.g., exact meters, prominence, or contour) is asserted.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "judge_false_positive",
+      "manual_note": "仍回答 seven-thousanders，Gold 是 mountain。",
+      "baseline_loops": 14,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 14203,
+      "task_list_retrieved_tokens": 18693,
+      "task_state_updates": 15,
+      "task_state_complete": false,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the elevation of Khunyang Chhish?",
+            "completion_criterion": "Khunyang Chhish has elevation of X meters/feet",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "2",
+            "question": "What is the elevation of Ismoil Somoni Peak?",
+            "completion_criterion": "Ismoil Somoni Peak has elevation of Y meters/feet",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          },
+          {
+            "id": "3",
+            "question": "What common land elevation do they share?",
+            "completion_criterion": "Both peaks have the same elevation of Z or share property W related to elevation",
+            "status": "pending",
+            "answer": "",
+            "evidence_quote": "",
+            "evidence_chunk_ids": []
+          }
+        ],
+        "expected_answer_type": "elevation value or property",
+        "candidate_answer": "",
+        "candidate_evidence_chunk_ids": [],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "seven thousand"
+        }
+      }
+    },
+    {
+      "qid": "5ae635505542992ae0d16282",
+      "question": "Where was the comedian from And There's More born? ",
+      "gold_answer": "Rochdale, North West England",
+      "baseline_answer": "**Ireland (specifically, he is described as an Irish comedian; full name James Mulgrew, born 17 October 1945).**\n\n“And There's More” is a comedy sketch show starring Jimmy Cricket (real name James Mulgrew), produced by Central Independent Television for ITV from 1985 to 1988. He is an Irish comedian who currently lives with his family in Rochdale, North West England. No more specific town or city of birth is mentioned in the available documents.",
+      "task_list_answer": "**Ireland (specifically, he is identified as an Irish comedian).**\n\nThe comedian from the comedy sketch show *And There's More* (produced by Central Independent Television for ITV, 1985–1988) is Jimmy Cricket, whose real name is James Mulgrew (born 17 October 1945). The source material directly states that he “is an Irish comedian” and that the show starred him. No more precise town or city of birth appears in the retrieved documents, so the birthplace is Ireland.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 6,
+      "task_list_loops": 15,
+      "baseline_retrieved_tokens": 5837,
+      "task_list_retrieved_tokens": 9421,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": true,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who is the comedian from And There's More?",
+            "completion_criterion": "Subject-relation-object: Jimmy Cricket (James Mulgrew) is the comedian associated with And There's More",
+            "status": "completed",
+            "answer": "Jimmy Cricket (James Mulgrew)",
+            "evidence_quote": "and there's more is a comedy sketch show starring jimmy cricket produced by central independent television for itv from 1985 till 1988.",
+            "evidence_chunk_ids": [
+              "1164"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Where was that comedian born?",
+            "completion_criterion": "Subject-relation-object: Jimmy Cricket / James Mulgrew was born in Ireland",
+            "status": "completed",
+            "answer": "Ireland",
+            "evidence_quote": "james mulgrew ( born 17 october 1945 ), known professionally as jimmy cricket, is an irish comedian.",
+            "evidence_chunk_ids": [
+              "1164"
+            ]
+          }
+        ],
+        "expected_answer_type": "place name (birthplace)",
+        "candidate_answer": "Ireland",
+        "candidate_evidence_chunk_ids": [
+          "1164"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5a84bda45542992a431d1a96",
+      "question": "Who was born in August and was a professor?",
+      "gold_answer": "Fred MacMurray",
+      "baseline_answer": "**Jan Drewes Achenbach (born 20 August 1935), William Arthur Sewell (born 9 August 1903), Zhang Kangzhi (born 12 August 1957), Jean-Paul Fitoussi (born 19 August 1942), C. Bradford Welles (born 9 August 1901), and Robert Matthew \"Matt\" Barrie (born 16 August 1973), among others.**\n\nThese individuals are explicitly described in the documents as having been born in August and holding professor (or professor emeritus/adjunct) positions:\n\n- **Jan Drewes Achenbach** (born 20 August 1935 in Leeuwarden, Netherlands) is a professor emeritus (Walter P. Murphy Professor and Distinguished McCormick School Professor) at Northwestern University. He earned his M.Sc. from Delft University of Technology (1959) and Ph.D. from Stanford (1962), then joined Northwestern after a year at Columbia.\n- **William Arthur Sewell** (9 August 1903 – 19 April 1972) was a university professor of English. Born in Goole, Yorkshire, England, he held chairs including at Auckland University College (from 1933), Byron Professor at the University of Athens (1946), and later positions at the University of Ankara, American University of Beirut, and University of Waikato (until 1969).\n- **Zhang Kangzhi** (born 12 August 1957 in Tongshan, Jiangsu Province) is a professor and Ph.D. tutor in the Department of Public Administration at Renmin University of China (a Changjiang Scholar), plus adjunct/guest roles at other universities.\n- **Jean-Paul Fitoussi** (born 19 August 1942) is a French economist and professor of economics at the Institut d'Études Politiques de Paris (since 1982); he was also a professor at the European University Institute (1979–1983) and is professor emeritus at LUISS Guido Carli University.\n- **C. Bradford Welles** (August 9, 1901 – October 8, 1969) was an American classicist and ancient historian who became a full professor at Yale University in 1940 (after earlier instructor/assistant/associate roles) and served as curator of the Yale Collection of Papyri.\n- **Robert Matthew \"Matt\" Barrie** (born 16 August 1973) is an Australian technology entrepreneur (CEO of Freelancer.com) and adjunct associate professor at the University of Sydney (teaching computer/network security since 2001 and technology venture creation since 2010).\n\nThese details come directly from the document chunks (primarily 1306, 1305, and 498). Other mentions of professors or August dates exist but do not jointly match both criteria as clearly (e.g., actors who portrayed professors).",
+      "task_list_answer": "**Jan Drewes Achenbach, William Arthur Sewell, Graham M. Schweig, and Zhang Kangzhi** (among others documented).\n\nEvidence from the documents:\n\n- **Jan Drewes Achenbach** (born 20 August 1935) “is a professor emeritus (Walter P. Murphy Professor and Distinguished McCormick School Professor) at Northwestern University.” He was born in Leeuwarden, Netherlands. (Chunk 1306)\n- **William Arthur Sewell** (9 August 1903 – 19 April 1972) “was a university professor of English.” He “was born in Goole, Yorkshire, England on 9 August 1903” and held chairs including at Auckland University College, the University of Athens, and the University of Waikato. (Chunk 1306)\n- **Graham M. Schweig** (born August 2nd, 1953 in Manhattan, New York) “is professor of religion and, director of studies in religion, and former inaugural director of the Asian Studies Program at Christopher Newport University.” (Chunk 307)\n- **Zhang Kangzhi** (12 August 1957 – ), “born in Tongshan, Jiangsu province, … a professor and a tutor of a Ph.D. in the Department of Public Administration of Renmin University of China (RUC).” (Chunk 1306)\n\nThese are the clearest matches where the same source text directly states both an August birth date and the status of professor (or professor emeritus / university professor). Other August-born individuals appear in the corpus but lack the professor relation in the same evidence.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 0,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 4,
+      "task_list_loops": 4,
+      "baseline_retrieved_tokens": 6507,
+      "task_list_retrieved_tokens": 4842,
+      "task_state_updates": 3,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "Who was born in August?",
+            "completion_criterion": "Person X was born in August (specific date or month stated)",
+            "status": "completed",
+            "answer": "Jan Drewes Achenbach born 20 August 1935; William Arthur Sewell born 9 August 1903; Graham M. Schweig born August 2nd 1953; Zhang Kangzhi born 12 August 1957",
+            "evidence_quote": "jan drewes achenbach ( born 20 august 1935 ); william arthur sewell ( 9 august 1903 ); graham m. schweig ( born august 2nd, 1953 ); zhang kangzhi （ 之, 12 august 1957 - ）",
+            "evidence_chunk_ids": [
+              "1306",
+              "307"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Who among those was a professor?",
+            "completion_criterion": "Person X was a professor",
+            "status": "completed",
+            "answer": "All of the above were professors",
+            "evidence_quote": "is a professor emeritus; was a university professor of english; is professor of religion; is ... a professor",
+            "evidence_chunk_ids": [
+              "1306",
+              "307"
+            ]
+          }
+        ],
+        "expected_answer_type": "Person name",
+        "candidate_answer": "Jan Drewes Achenbach (or William Arthur Sewell, Graham M. Schweig, Zhang Kangzhi)",
+        "candidate_evidence_chunk_ids": [
+          "1306",
+          "307"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "keyword_search",
+          "query": "born August professor"
+        }
+      }
+    },
+    {
+      "qid": "5a84e0a45542991dd0999e11",
+      "question": "Which is farther north, Steel Venom or Wicked Twister?",
+      "gold_answer": "Wicked Twister",
+      "baseline_answer": "**Steel Venom is farther north.**\n\nSteel Venom is a steel inverted impulse roller coaster at Valleyfair in Shakopee, Minnesota.\n\nWicked Twister is a second-generation steel inverted impulse roller coaster at Cedar Point in Sandusky, Ohio.\n\nMinnesota (and specifically the Minneapolis-area location of Valleyfair/Shakopee) lies well north of Ohio (and Sandusky on Lake Erie). The two coasters are similar designs (Steel Venom has one vertical spiral; Wicked Twister has two), but their parks’ latitudes make Steel Venom the northern one.",
+      "task_list_answer": "**Steel Venom** is farther north.\n\nSteel Venom is a steel inverted impulse roller coaster at Valleyfair in Minnesota (specifically Shakopee).\n\nWicked Twister is a steel inverted impulse roller coaster at Cedar Point in Sandusky, Ohio.\n\nMinnesota lies well north of Ohio (Valleyfair/Shakopee is roughly in the mid-44°N range; Sandusky is around 41.5°N), so Steel Venom’s location is farther north.",
+      "baseline_primary_failure_type": "12. Gold answer、数据或评测问题",
+      "baseline_aggregate_bucket": "gold_data_issue",
+      "task_list_llm_accuracy": 0.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "gold_data_issue_persists",
+      "manual_note": "问题、Gold 或 supporting chain 问题仍然存在。",
+      "baseline_loops": 6,
+      "task_list_loops": 13,
+      "baseline_retrieved_tokens": 4896,
+      "task_list_retrieved_tokens": 5163,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What is the location or latitude of Steel Venom?",
+            "completion_criterion": "Steel Venom is located at Valleyfair in Minnesota",
+            "status": "completed",
+            "answer": "Valleyfair in Minnesota (Shakopee)",
+            "evidence_quote": "steel venom is a steel inverted impulse roller coaster located at valleyfair in minnesota.",
+            "evidence_chunk_ids": [
+              "1240"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "What is the location or latitude of Wicked Twister?",
+            "completion_criterion": "Wicked Twister is located at Cedar Point in Sandusky, Ohio",
+            "status": "completed",
+            "answer": "Cedar Point in Sandusky, Ohio",
+            "evidence_quote": "wicked twister is a second generation steel inverted impulse roller coaster at cedar point in sandusky, ohio.",
+            "evidence_chunk_ids": [
+              "1241"
+            ]
+          },
+          {
+            "id": "3",
+            "question": "Which of Steel Venom or Wicked Twister is farther north?",
+            "completion_criterion": "Comparison of northern positions of Steel Venom and Wicked Twister",
+            "status": "completed",
+            "answer": "Steel Venom",
+            "evidence_quote": "steel venom is a steel inverted impulse roller coaster located at valleyfair in minnesota. ... wicked twister is a second generation steel inverted impulse roller coaster at cedar point in sandusky, ohio.",
+            "evidence_chunk_ids": [
+              "1240",
+              "1241"
+            ]
+          }
+        ],
+        "expected_answer_type": "string (name of the coaster farther north)",
+        "candidate_answer": "Steel Venom",
+        "candidate_evidence_chunk_ids": [
+          "1240",
+          "1241"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    },
+    {
+      "qid": "5ac3a47f554299391541386d",
+      "question": "Dunstan is an electoral district that includes which suburb of Adelaide in the City of Norwood Payneham St Peters?",
+      "gold_answer": "College Park",
+      "baseline_answer": "**Norwood (and several others, such as St Peters, Payneham South, College Park, Hackney, Evandale, Joslin, Maylands, Stepney, and parts of Payneham).**\n\nAccording to the available documents, the electoral district of Dunstan (in the South Australian House of Assembly) covers a range of inner eastern Adelaide suburbs. These include multiple suburbs that lie within the City of Norwood Payneham & St Peters local government area, most notably Norwood itself (the city’s namesake suburb), along with College Park, Evandale, Hackney, Joslin, Maylands, Payneham South, St Peters, Stepney, and others (plus parts of Payneham).\n\nThe district was formerly known as Norwood before being renamed Dunstan. The documents do not single out only one suburb, but Norwood is the core/central example matching the question’s description.",
+      "task_list_answer": "**College Park (also including others such as Norwood, St Peters, Hackney, Joslin, Evandale, and Payneham South).**\n\nDunstan is an electoral district of the South Australian House of Assembly that covers the inner eastern suburbs of Adelaide, specifically: Beulah Park, College Park, Evandale, Firle, Hackney, Joslin, Kensington, Kent Town, Marden, Maylands, Norwood, Payneham South, Royston Park, St Morris, St Peters, Stepney, Trinity Gardens, and Vale Park, plus parts of Klemzig and Payneham.\n\nMultiple of these are suburbs of Adelaide located within the City of Norwood Payneham St Peters local government area. Explicit examples from the documents include:\n- College Park (formerly “College Town”), described as a suburb of Adelaide in the City of Norwood Payneham St Peters.\n- Evandale, Hackney, Joslin, Payneham South, and St Peters, all similarly identified as suburbs of Adelaide in that same city council area.\n\n(Norwood itself is the namesake suburb of the City of Norwood Payneham St Peters and is also fully included in the Dunstan district.) The documents confirm these direct inclusions without further qualification.",
+      "baseline_primary_failure_type": "11. 最终答案表达或格式问题",
+      "baseline_aggregate_bucket": "answer_format_or_eval",
+      "task_list_llm_accuracy": 1.0,
+      "task_list_contain_accuracy": 1,
+      "manual_outcome": "genuine_improvement",
+      "manual_note": "主答案由 Norwood 修正为第二跳唯一确认的 College Park。",
+      "baseline_loops": 8,
+      "task_list_loops": 14,
+      "baseline_retrieved_tokens": 5427,
+      "task_list_retrieved_tokens": 4931,
+      "task_state_updates": 5,
+      "task_state_complete": true,
+      "max_loops_exceeded": false,
+      "guard_events": [],
+      "final_task_state": {
+        "subtasks": [
+          {
+            "id": "1",
+            "question": "What suburbs does the Dunstan electoral district include?",
+            "completion_criterion": "Dunstan electoral district includes list of suburbs: beulah park, college park, etc.",
+            "status": "completed",
+            "answer": "beulah park, college park, evandale, firle, hackney, joslin, kensington, kent town, marden, maylands, norwood, payneham south, royston park, st morris, st peters, stepney, trinity gardens and vale park and parts of klemzig and payneham",
+            "evidence_quote": "dunstan is an electoral district of the house of assembly in the australian state of south australia, covering the inner eastern suburbs of beulah park, college park, evandale, firle, hackney, joslin, kensington, kent town, marden, maylands, norwood, payneham south, royston park, st morris, st peters, stepney, trinity gardens and vale park and parts of klemzig and payneham.",
+            "evidence_chunk_ids": [
+              "1057"
+            ]
+          },
+          {
+            "id": "2",
+            "question": "Which of those suburbs is in the City of Norwood Payneham St Peters?",
+            "completion_criterion": "Suburb X is in City of Norwood Payneham St Peters and included in Dunstan",
+            "status": "completed",
+            "answer": "College Park",
+            "evidence_quote": "college park ( previously \" college town \" ) is a suburb of adelaide, south australia in the city of norwood payneham st peters. ... dunstan is an electoral district ... covering the inner eastern suburbs of beulah park, college park, ...",
+            "evidence_chunk_ids": [
+              "1057"
+            ]
+          }
+        ],
+        "expected_answer_type": "suburb name",
+        "candidate_answer": "College Park",
+        "candidate_evidence_chunk_ids": [
+          "1057"
+        ],
+        "unresolved_conflicts": [],
+        "next_action": {
+          "tool": "",
+          "query": ""
+        }
+      }
+    }
+  ]
+}

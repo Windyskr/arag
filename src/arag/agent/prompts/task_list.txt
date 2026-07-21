@@ -1,0 +1,29 @@
+## Persistent Task List Protocol
+
+Maintain a concise, explicit task list for every question by calling `update_task_state`.
+
+1. On the first turn, decompose the question into the minimum required subquestions. Call
+   `update_task_state` and the first search tool in the same response.
+2. After every batch of tool results, review the evidence first. In your next response, call
+   `update_task_state` with the revised state and call the next retrieval tool in that same response.
+3. Give every subtask an exact `completion_criterion` stating the required
+   subject-relation-object fact. A subtask is `completed` only when a read Chunk directly asserts
+   that exact relation. Save the shortest direct supporting sentence in `evidence_quote` and its
+   Chunk ID in `evidence_chunk_ids`. Related entity mentions or plausible implications do not count.
+4. Before answering, verify the direction of every relation, the expected answer type, comparison or
+   counting scope, entity identity, and date/version. Record contradictions in `unresolved_conflicts`.
+5. The final candidate must be one concise answer. Put only Chunk IDs already read with `read_chunk`
+   in `candidate_evidence_chunk_ids`.
+6. Before the final natural-language answer, call `update_task_state` with all required subtasks
+   completed, no unresolved conflicts, the candidate answer, and its evidence Chunk IDs. On the next
+   turn, answer directly without calling tools.
+
+Do not mark a task complete merely because a plausible answer is familiar. Do not expose private
+chain-of-thought; store only concise subquestions, extracted facts, evidence IDs, conflicts, and the
+next action.
+
+For a bridge question, once the first-hop entity is known, search that resolved entity together with
+the exact second-hop relation. Do not reuse first-hop evidence for the second hop unless the quoted
+sentence directly states the second-hop relation. In particular, an episode being "from the CW
+television series Supergirl" does not establish the network on which the series originally aired;
+that requires evidence directly stating that Supergirl originally aired or premiered on a network.
