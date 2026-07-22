@@ -14,16 +14,22 @@ Maintain a concise, explicit task list for every question by calling `update_tas
    counting scope, entity identity, and date/version. Record contradictions in `unresolved_conflicts`.
 5. The final candidate must be one concise answer. Put only Chunk IDs already read with `read_chunk`
    in `candidate_evidence_chunk_ids`.
-6. Before the final natural-language answer, call `update_task_state` with all required subtasks
-   completed, no unresolved conflicts, the candidate answer, and its evidence Chunk IDs. On the next
-   turn, answer directly without calling tools.
+6. Established necessary subtasks cannot silently disappear. Give each subtask stable IDs and
+   `depends_on` links. Supply a `revision_reason` for material changes. If removing or merging an
+   established subtask, use `removed_subtasks` with a specific reason and merge target when relevant.
+   A changed completion criterion makes that subtask pending until the revised fact is supported.
+7. Before submitting, call `update_task_state` with all required subtasks completed, no unresolved
+   conflicts, the candidate answer, and its evidence Chunk IDs. Then call `submit_answer` with the
+   same answer, exact answer type, all completed subtask IDs, and supporting read Chunk IDs. Do not
+   express completion by returning an ordinary natural-language answer.
 
 Do not mark a task complete merely because a plausible answer is familiar. Do not expose private
 chain-of-thought; store only concise subquestions, extracted facts, evidence IDs, conflicts, and the
 next action.
 
 For a bridge question, once the first-hop entity is known, search that resolved entity together with
-the exact second-hop relation. Do not reuse first-hop evidence for the second hop unless the quoted
-sentence directly states the second-hop relation. In particular, an episode being "from the CW
-television series Supergirl" does not establish the network on which the series originally aired;
-that requires evidence directly stating that Supergirl originally aired or premiered on a network.
+the exact second-hop relation. An entity description containing a related name (for example a
+network, place, organization, or person) does not prove the exact relation requested by the question.
+Do not reuse first-hop evidence for the second hop unless the quote directly states the second-hop
+relation. The first-hop entity cannot replace the final relation answer unless the original question
+explicitly asks for that entity.

@@ -45,10 +45,21 @@ uv run python scripts/batch_runner.py \
     --output results/musique \
     --limit 10 --workers 5
 
-# 6. Evaluate results
+# 6. Evaluate results (writes a checkpoint and final artifacts under results/musique/eval)
+# ARAG_MODEL configures generation. Set ARAG_JUDGE_MODEL only when the judge
+# differs; ARAG_JUDGE_BASE_URL overrides ARAG_BASE_URL for evaluation.
 uv run python scripts/eval.py \
     --predictions results/musique/predictions.jsonl \
+    --output results/musique/eval \
     --workers 5
+
+# After an interruption, resume only with the same source file, judge model,
+# base URL, and prompt configuration.
+uv run python scripts/eval.py \
+    --predictions results/musique/predictions.jsonl \
+    --output results/musique/eval \
+    --workers 5 \
+    --resume
 ```
 
 > **Note**: Datasets hosted on [HuggingFace 🤗](https://huggingface.co/datasets/Ayanami0730/rag_test), reformatted from [Zly0523/linear-rag](https://huggingface.co/datasets/Zly0523/linear-rag) and [GraphRAG-Bench](https://huggingface.co/datasets/GraphRAG-Bench/GraphRAG-Bench) into a unified format.
@@ -284,9 +295,10 @@ uv run python scripts/batch_runner.py \
     --output results/musique \
     --workers 10
 
-# Evaluate
+# Evaluate (the raw prediction file is never overwritten)
 uv run python scripts/eval.py \
     --predictions results/musique/predictions.jsonl \
+    --output results/musique/eval \
     --workers 10
 ```
 

@@ -45,7 +45,7 @@ class UpdateTaskStateTool(BaseTool):
                                     },
                                     "status": {
                                         "type": "string",
-                                        "enum": ["pending", "completed", "blocked"],
+                                        "enum": ["pending", "completed", "blocked", "unsupported"],
                                     },
                                     "answer": {"type": "string"},
                                     "evidence_quote": {
@@ -58,6 +58,18 @@ class UpdateTaskStateTool(BaseTool):
                                     "evidence_chunk_ids": {
                                         "type": "array",
                                         "items": {"type": "string"},
+                                    },
+                                    "depends_on": {
+                                        "type": "array",
+                                        "items": {"type": "string"},
+                                        "description": "IDs of prerequisite subtasks.",
+                                    },
+                                    "revision_reason": {
+                                        "type": "string",
+                                        "description": (
+                                            "Required when materially revising a subtask question, "
+                                            "criterion, or completed answer."
+                                        ),
                                     },
                                 },
                                 "required": [
@@ -80,6 +92,21 @@ class UpdateTaskStateTool(BaseTool):
                             "type": "object",
                             "description": "Concise next tool and query, or empty when complete.",
                         },
+                        "removed_subtasks": {
+                            "type": "array",
+                            "description": (
+                                "Explicitly justified removals or merges of established subtasks."
+                            ),
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {"type": "string"},
+                                    "reason": {"type": "string"},
+                                    "merged_into": {"type": "string"},
+                                },
+                                "required": ["id", "reason"],
+                            },
+                        },
                     },
                     "required": [
                         "subtasks", "expected_answer_type", "candidate_answer",
@@ -98,6 +125,7 @@ class UpdateTaskStateTool(BaseTool):
         candidate_evidence_chunk_ids: List[str] = None,
         unresolved_conflicts: List[str] = None,
         next_action: Dict[str, Any] = None,
+        removed_subtasks: List[Dict[str, Any]] = None,
     ) -> Tuple[str, Dict[str, Any]]:
         context.update_task_state(
             subtasks=subtasks,
@@ -106,6 +134,7 @@ class UpdateTaskStateTool(BaseTool):
             candidate_evidence_chunk_ids=candidate_evidence_chunk_ids,
             unresolved_conflicts=unresolved_conflicts,
             next_action=next_action,
+            removed_subtasks=removed_subtasks,
         )
         complete, reason = context.task_completion_status()
         pending = [

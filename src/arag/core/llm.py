@@ -1,6 +1,8 @@
 """LLM client for ARAG - unified interface for OpenAI-compatible APIs."""
 
 import os
+import random
+import time
 from typing import Any, Dict, List, Optional
 
 import requests
@@ -62,6 +64,7 @@ class LLMClient:
         temperature: float = 0.0,
         max_tokens: int = 16384,
         reasoning_effort: str = None,
+        max_retries: int = 5,
     ):
         self.model = model or os.getenv("ARAG_MODEL", "gpt-4o-mini")
         self.api_key = api_key or os.getenv("ARAG_API_KEY")
@@ -69,6 +72,7 @@ class LLMClient:
         self.temperature = temperature
         self.max_tokens = max_tokens
         self.reasoning_effort = reasoning_effort
+        self.max_retries = max(0, int(max_retries))
         
         if not self.api_key:
             raise ValueError("API key required. Set ARAG_API_KEY environment variable or pass api_key parameter.")
@@ -147,8 +151,49 @@ class LLMClient:
         if self.reasoning_effort:
             payload["reasoning_effort"] = self.reasoning_effort
         
-        response = requests.post(url, headers=headers, json=payload, timeout=300)
-        response.raise_for_status()
+        response = None
+        retryable_statuses = {400, 408, 429, 500, 502, 503, 504}
+        permanent_400_markers = (
+            "reasoning_content",
+            "invalid_request_error",
+            "invalid request",
+            "unsupported parameter",
+            "unknown parameter",
+        )
+        for attempt in range(self.max_retries + 1):
+            try:
+                response = requests.post(url, headers=headers, json=payload, timeout=300)
+                detail = getattr(response, "text", "")[:2000]
+                is_permanent_400 = (
+                    response.status_code == 400
+                    and any(marker in detail.lower() for marker in permanent_400_markers)
+                )
+                if response.status_code not in retryable_statuses or is_permanent_400:
+                    if response.status_code >= 400:
+                        raise requests.HTTPError(
+                            f"HTTP {response.status_code} from {url}: {detail}",
+                            response=response,
+                        )
+                    break
+                if attempt >= self.max_retries:
+                    raise requests.HTTPError(
+                        f"HTTP {response.status_code} from {url}: {detail}",
+                        response=response,
+                    )
+            except (requests.ConnectionError, requests.Timeout):
+                if attempt >= self.max_retries:
+                    raise
+
+            retry_after = response.headers.get("Retry-After") if response is not None else None
+            try:
+                delay = float(retry_after) if retry_after else 0.0
+            except ValueError:
+                delay = 0.0
+            delay = max(delay, min(2 ** attempt + random.random(), 30.0))
+            time.sleep(delay)
+
+        if response is None:
+            raise RuntimeError("LLM request failed without a response")
         result = response.json()
         
         usage = result.get("usage", {})

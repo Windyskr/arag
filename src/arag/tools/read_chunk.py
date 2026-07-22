@@ -124,8 +124,8 @@ Note: Previously read chunks will be marked as already seen to avoid redundant i
                 chunk_tokens = len(self.tokenizer.encode(content))
                 total_tokens += chunk_tokens
                 
-                # Mark as read
-                context.mark_chunk_as_read(cid)
+                # Retain the exact body for later deterministic quote validation.
+                context.mark_chunk_as_read(cid, content)
                 new_chunks_read.append(cid)
             else:
                 result_parts.append(f"\n[Chunk {cid}] - Not found")
